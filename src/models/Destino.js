@@ -17,16 +17,23 @@ const Destino = connection.define('destinos', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    coordenadas_geo: {
+        type: DataTypes.STRING
+    },
+    cep: {
+        type: DataTypes.STRING
+    },
     cidade: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    uf: {
+    estado: {
         type:DataTypes.STRING,
         allowNull: false
     },
-    coordenadas_geo: {
-        type: DataTypes.STRING
+    pais: {
+        type:DataTypes.STRING,
+        allowNull: false
     }
 })
 

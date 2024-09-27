@@ -6,8 +6,9 @@ async function consultaCep(cep) {
         if (buscaCep.data.cep) {
             return {
                 endereco: buscaCep.data.logradouro,
+                bairro: buscaCep.data.bairro,
                 cidade: buscaCep.data.localidade,
-                uf: buscaCep.data.uf,
+                estado: buscaCep.data.estado,
                 latitude: buscaCep.data.latitude,
                 longitude: buscaCep.data.longitude
             }

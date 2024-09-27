@@ -6,19 +6,19 @@ class UsuarioController {
     async cadastrar(req, res) {
         /*
             #swagger.tags = ['Usuario'],
+            #swagger.description = 'Cadastra novo usuário, validação de duplicidade de email e cpf, busca endereço a partir do CEP informado',
             #swagger.parameters['body'] = {
                 in: 'body',
                 description: 'Cadastra novo usuário',
                 schema: {
-                    $nome: 'Karina',
+                    $nome: 'Catarina Márcia Costa',
                     $sexo: 'Feminino',
-                    $cpf: '83526448078',
-                    $cep: '88066242',                    
-                    $numero: '577',
-                    complemento: 'Apto 1',
-                    $email: 'email@email.com',
-                    $data_nascimento: '1979-03-22',
-                    $password: '1234'
+                    $cpf: '25942677085',
+                    $data_nascimento: '1980-03-03',
+                    $email: 'catarina_costa@lins.net.br',
+                    $password: '12345',
+                    $cep: '91160040',
+                    $numero: '700'                   
                 }
             }
         */
@@ -26,8 +26,11 @@ class UsuarioController {
             const { nome, sexo, cpf, cep, numero,
                 email, data_nascimento, password } = req.body            
 
-            const { endereco } = await consultaCep(cep)  
-            req.body.endereco = endereco         
+            const { endereco, bairro, cidade, estado } = await consultaCep(cep)  
+            req.body.endereco = endereco  
+            req.body.bairro = bairro
+            req.body.cidade = cidade
+            req.body.estado = estado          
 
             if (!(nome || sexo || cpf || cep || numero
                 || email || data_nascimento || password)) {
@@ -67,7 +70,8 @@ class UsuarioController {
     async listar(req, res) {
         try {
             /*
-            #swagger.tags = ['Usuario']
+            #swagger.tags = ['Usuario'],
+            #swagger.description = 'Lista dados do usuário autenticado',
         */
             const { id } = req.params
             const usuario = await Usuario.findByPk(id)
@@ -89,20 +93,21 @@ class UsuarioController {
     async atualizar(req, res) {
         /*
             #swagger.tags = ['Usuario'],
+            #swagger.description = 'Atualiza dados do usuário autenticado',
             #swagger.parameters['body'] = {
                 in: 'body',
                 description: 'Atualiza usuário',
                 schema: {
-                    nome: 'Nome Alterado',
-                    sexo: 'Feminino',
-                    cpf: '83526448078',
-                    cep: '88066242',
-                    endereco: 'Servidao Alfredo',
-                    numero: '577',
-                    complemento: 'Apto 1',
-                    email: 'email@email.com',
-                    data_nascimento: '1979-03-22',
-                    password: '1234'
+                    nome: 'Gabrielly Catarina Márcia Costa',
+                    sexo: 'Feminino',                    
+                    data_nascimento: '1980-03-03',
+                    email: 'gabrielly_catarina_costa@lins.net.br',                    
+                    cep: '69307540',
+                    endereco: 'Rua da Tamarineira',
+                    numero: '786',
+                    bairro: 'Caçari',
+                    cidade: 'Boa Vista',
+                    estado: 'Roraima'                   
                 }
             }
         */
@@ -125,7 +130,8 @@ class UsuarioController {
 
     async excluir(req, res) {
         /*
-            #swagger.tags = ['Usuario']
+            #swagger.tags = ['Usuario'],
+            #swagger.description = 'Exclui usuário autenticado, desde que não tenha locais cadastrados',
         */
         try {
             const { id } = req.params
@@ -133,6 +139,20 @@ class UsuarioController {
 
             if(!(usuario.id === req.userId)) {
                 return res.status(403).json({ erro: 'Acesso não autorizado' })
+            }
+
+            if(!usuario) {
+                return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
+            }
+
+            const localUsuario = await Local.findAll({
+                where: {
+                    usuario_id: id
+                }
+            })
+
+            if (localUsuario.length > 0) {
+                return res.status(400).json({erro: "Este usuário não pode ser excluído pois possui locais cadastrados."})
             }
 
             await usuario.destroy()

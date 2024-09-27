@@ -1,4 +1,3 @@
-const { userInfo } = require('os')
 const Destino = require('../models/Destino')
 const { consultaCidade } = require('../utils/consultaCidade')
 
@@ -6,13 +5,14 @@ class DestinoController {
     async cadastrar(req, res) {
                 /*
             #swagger.tags = ['Local'],
+            #swagger.description = 'Cadastra novo local, buscando a cidade e o estado pelas coordenadas informadas, pelo usuário autenticado',
             #swagger.parameters['body'] = {
                 in: 'body',
-                description: 'Cadastra novo destino',
+                description: 'Cadastra novo local',
                 schema: {
-                    $nome: "Lagoa do Peri",
-                    $descricao: "Local muito bom para passar o dia com a família, lagoa própria pra banho e com opção de realizar trilha no local, há um restaurante na entrada da lagoa",
-                    $coordenadas_geo: "-27.7292638,-48.5559065"
+                    $nome: "Praia da Armação",
+                    $descricao: "Praia extensa com restaurantes de frutos do mar e ideal para passear de barco, nadar e fazer caminhadas pela encosta.",
+                    $coordenadas_geo: "-27.7442822,-48.5182281"
                 }
             }
         */
@@ -26,7 +26,7 @@ class DestinoController {
             const descricao = req.body.descricao
             const coordenadas_geo = req.body.coordenadas_geo           
 
-            if (!(usuario_id || nome || descricao || cidade || uf || coordenadas_geo)) {
+            if (!(usuario_id || nome || descricao || cidade || pais || estado || coordenadas_geo)) {
                 return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos' })
             }
 
@@ -41,11 +41,12 @@ class DestinoController {
             }
             
             if (coordenadas_geo) {
-                const { cidade, uf } = await consultaCidade(coordenadas_geo)
+                const { cidade, estado, pais } = await consultaCidade(coordenadas_geo)
 
-                if (cidade && uf) {
+                if (cidade && estado && pais) {
                     req.body.cidade = cidade
-                    req.body.uf = uf                    
+                    req.body.estado = estado
+                    req.body.pais = pais                    
                 } else {
                     throw new Error('Não foi possível encontrar a cidade e estado para as coordenadas fornecidas')
                 }
@@ -63,7 +64,8 @@ class DestinoController {
 
     async listar(req, res) {
         /*
-            #swagger.tags = ['Local']
+            #swagger.tags = ['Local'],
+            #swagger.description = 'Lista todos os locais cadastrados pelo usuário autenticado'
         */
         try {            
             const userId = req.userId
@@ -81,7 +83,8 @@ class DestinoController {
 
     async listarUm(req, res) {
         /*
-            #swagger.tags = ['Local']
+            #swagger.tags = ['Local'],
+            #swagger.description = 'Lista local específico cadastrado pelo usuário autenticado'
         */
         try {
             const { id } = req.params
@@ -102,13 +105,18 @@ class DestinoController {
     async atualizar(req, res) {
         /*
             #swagger.tags = ['Local'],
+            #swagger.description = 'Atualiza dados do local cadastrado pelo usuário autenticado',
             #swagger.parameters['body'] = {
                 in: 'body',
                 description: 'Atualiza local',
                 schema: {
-                    nome: 'Nome Alterado',
-                    descricao: "Local muito bom para passar o dia com a família, lagoa própria pra banho e com opção de realizar trilha no local, há um restaurante na entrada da lagoa",
-                    coordenadas_geo: "-27.7292638,-48.5559080"
+                    nome: 'Praia da Armação',
+                    descricao: 'Praia extensa com restaurantes de frutos do mar e ideal para passear de barco, nadar e fazer caminhadas pela encosta.',
+                    coordenadas_geo: '-27.7442822,-48.5182281',
+                    cep: '88066260',
+                    cidade: 'Florianópolis',
+                    estado: 'Santa Catarina',
+                    pais: 'Brasil'
                 }
             }
         */
@@ -131,7 +139,8 @@ class DestinoController {
 
     async excluir(req, res) {
         /*
-            #swagger.tags = ['Local']
+            #swagger.tags = ['Local'],
+            #swagger.description = 'Exclui local cadastrado pelo usuário autenticado'
         */
         try {
             const { id } = req.params

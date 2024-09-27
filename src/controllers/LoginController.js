@@ -10,8 +10,8 @@ class LoginController {
                 in: 'body',
                 description: 'Login',
                 schema: {
-                    $email: 'email@email.com',
-                    $password: '1234'
+                    $email: 'gabrielly_catarina_costa@lins.net.br',
+                    $password: 'RnGLYZFgc4'
                 }
             }
         */
@@ -35,6 +35,7 @@ class LoginController {
 
             const hashSenha = await compare(password, usuario.password)
             if(hashSenha === false) {
+
                 return res.status(400).json({ mensagem: 'Senha inválida' })
             }
 

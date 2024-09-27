@@ -26,17 +26,24 @@ module.exports = {
       },
       descricao: {
         allowNull: false,
+        type: Sequelize.STRING(500)
+      },
+      coordenadas_geo: {
+        type: Sequelize.STRING
+      },
+      cep: {
         type: Sequelize.STRING
       },
       cidade: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      uf: {
+      estado: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      coordenadas_geo: {
+      pais: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       createdAt: {

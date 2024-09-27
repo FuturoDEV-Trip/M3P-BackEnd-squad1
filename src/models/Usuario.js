@@ -24,6 +24,19 @@ const Usuario = connection.define('usuarios', {
             }
         }
     },
+    data_nascimento: {
+        type: DataTypes.DATEONLY,
+        allowNull: false
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     cep: {
         type: DataTypes.STRING,
         allowNull: false
@@ -36,27 +49,23 @@ const Usuario = connection.define('usuarios', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    complemento: {
-        type: DataTypes.STRING
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    data_nascimento: {
-        type: DataTypes.DATEONLY,
-        allowNull: false
-    },
-    password: {
+    bairro: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    cidade: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    estado: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }    
 })
 
-Usuario.beforeSave(async (user) => {    
-    user.password = await hash(user.password, 8)
-    return user    
+Usuario.beforeSave(async (usuario) => {    
+    usuario.password = await hash(usuario.password, 8)
+    return usuario    
 })
 
 module.exports = Usuario

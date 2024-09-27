@@ -35,11 +35,11 @@
               "properties": {
                 "email": {
                   "type": "string",
-                  "example": "email@email.com"
+                  "example": "gabrielly_catarina_costa@lins.net.br"
                 },
                 "password": {
                   "type": "string",
-                  "example": "1234"
+                  "example": "RnGLYZFgc4"
                 }
               },
               "required": [
@@ -70,7 +70,7 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Cadastra novo usuário, validação de duplicidade de email e cpf, busca endereço a partir do CEP informado",
         "parameters": [
           {
             "name": "body",
@@ -81,7 +81,7 @@
               "properties": {
                 "nome": {
                   "type": "string",
-                  "example": "Karina"
+                  "example": "Catarina Márcia Costa"
                 },
                 "sexo": {
                   "type": "string",
@@ -89,42 +89,38 @@
                 },
                 "cpf": {
                   "type": "string",
-                  "example": "83526448078"
-                },
-                "cep": {
-                  "type": "string",
-                  "example": "88066242"
-                },
-                "numero": {
-                  "type": "string",
-                  "example": "577"
-                },
-                "complemento": {
-                  "type": "string",
-                  "example": "Apto 1"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "email@email.com"
+                  "example": "25942677085"
                 },
                 "data_nascimento": {
                   "type": "string",
-                  "example": "1979-03-22"
+                  "example": "1980-03-03"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "catarina_costa@lins.net.br"
                 },
                 "password": {
                   "type": "string",
-                  "example": "1234"
+                  "example": "12345"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "91160040"
+                },
+                "numero": {
+                  "type": "string",
+                  "example": "700"
                 }
               },
               "required": [
                 "nome",
                 "sexo",
                 "cpf",
-                "cep",
-                "numero",
-                "email",
                 "data_nascimento",
-                "password"
+                "email",
+                "password",
+                "cep",
+                "numero"
               ]
             }
           }
@@ -150,7 +146,7 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Lista dados do usuário autenticado",
         "parameters": [
           {
             "name": "id",
@@ -183,7 +179,7 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Atualiza dados do usuário autenticado",
         "parameters": [
           {
             "name": "id",
@@ -205,43 +201,43 @@
               "properties": {
                 "nome": {
                   "type": "string",
-                  "example": "Nome Alterado"
+                  "example": "Gabrielly Catarina Márcia Costa"
                 },
                 "sexo": {
                   "type": "string",
                   "example": "Feminino"
                 },
-                "cpf": {
+                "data_nascimento": {
                   "type": "string",
-                  "example": "83526448078"
-                },
-                "cep": {
-                  "type": "string",
-                  "example": "88066242"
-                },
-                "endereco": {
-                  "type": "string",
-                  "example": "Servidao Alfredo"
-                },
-                "numero": {
-                  "type": "string",
-                  "example": "577"
-                },
-                "complemento": {
-                  "type": "string",
-                  "example": "Apto 1"
+                  "example": "1980-03-03"
                 },
                 "email": {
                   "type": "string",
-                  "example": "email@email.com"
+                  "example": "gabrielly_catarina_costa@lins.net.br"
                 },
-                "data_nascimento": {
+                "cep": {
                   "type": "string",
-                  "example": "1979-03-22"
+                  "example": "69307540"
                 },
-                "password": {
+                "endereco": {
                   "type": "string",
-                  "example": "1234"
+                  "example": "Rua da Tamarineira"
+                },
+                "numero": {
+                  "type": "string",
+                  "example": "786"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "Caçari"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "Boa Vista"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "Roraima"
                 }
               }
             }
@@ -266,7 +262,7 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Exclui usuário autenticado, desde que não tenha locais cadastrados",
         "parameters": [
           {
             "name": "id",
@@ -284,11 +280,17 @@
           "200": {
             "description": "OK"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -301,7 +303,7 @@
         "tags": [
           "Local"
         ],
-        "description": "",
+        "description": "Cadastra novo local, buscando a cidade e o estado pelas coordenadas informadas, pelo usuário autenticado",
         "parameters": [
           {
             "name": "authorization",
@@ -311,21 +313,21 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Cadastra novo destino",
+            "description": "Cadastra novo local",
             "schema": {
               "type": "object",
               "properties": {
                 "nome": {
                   "type": "string",
-                  "example": "Lagoa do Peri"
+                  "example": "Praia da Armação"
                 },
                 "descricao": {
                   "type": "string",
-                  "example": "Local muito bom para passar o dia com a família, lagoa própria pra banho e com opção de realizar trilha no local, há um restaurante na entrada da lagoa"
+                  "example": "Praia extensa com restaurantes de frutos do mar e ideal para passear de barco, nadar e fazer caminhadas pela encosta."
                 },
                 "coordenadas_geo": {
                   "type": "string",
-                  "example": "-27.7292638,-48.5559065"
+                  "example": "-27.7442822,-48.5182281"
                 }
               },
               "required": [
@@ -358,7 +360,7 @@
         "tags": [
           "Local"
         ],
-        "description": "",
+        "description": "Lista todos os locais cadastrados pelo usuário autenticado",
         "parameters": [
           {
             "name": "authorization",
@@ -384,7 +386,7 @@
         "tags": [
           "Local"
         ],
-        "description": "",
+        "description": "Lista local específico cadastrado pelo usuário autenticado",
         "parameters": [
           {
             "name": "id",
@@ -417,7 +419,7 @@
         "tags": [
           "Local"
         ],
-        "description": "",
+        "description": "Atualiza dados do local cadastrado pelo usuário autenticado",
         "parameters": [
           {
             "name": "id",
@@ -439,15 +441,31 @@
               "properties": {
                 "nome": {
                   "type": "string",
-                  "example": "Nome Alterado"
+                  "example": "Praia da Armação"
                 },
                 "descricao": {
                   "type": "string",
-                  "example": "Local muito bom para passar o dia com a família, lagoa própria pra banho e com opção de realizar trilha no local, há um restaurante na entrada da lagoa"
+                  "example": "Praia extensa com restaurantes de frutos do mar e ideal para passear de barco, nadar e fazer caminhadas pela encosta."
                 },
                 "coordenadas_geo": {
                   "type": "string",
-                  "example": "-27.7292638,-48.5559080"
+                  "example": "-27.7442822,-48.5182281"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "88066260"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "Florianópolis"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "Santa Catarina"
+                },
+                "pais": {
+                  "type": "string",
+                  "example": "Brasil"
                 }
               }
             }
@@ -472,7 +490,7 @@
         "tags": [
           "Local"
         ],
-        "description": "",
+        "description": "Exclui local cadastrado pelo usuário autenticado",
         "parameters": [
           {
             "name": "id",
@@ -487,6 +505,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
