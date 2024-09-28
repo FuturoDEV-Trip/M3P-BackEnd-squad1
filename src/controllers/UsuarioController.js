@@ -1,7 +1,7 @@
 const Usuario = require('../models/Usuario')
 const { consultaCep } = require('../utils/consultaCep')
 const bcrypt = require("bcrypt");
-
+const Destino = require('../models/Destino')
 
 class UsuarioController {
     async cadastrar(req, res) {
@@ -92,11 +92,12 @@ class UsuarioController {
             const { id } = req.params
             const usuario = await Usuario.findByPk(id)
 
-            if (!usuario) {
-                return res.status(200).json({ erro: 'Usuário não encontrado'})
+            if(!usuario) {
+                return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
             }
+
             if (!(usuario.id === req.userId)) {
-                return res.status(403).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado' })
             }
 
             res.status(200).json(usuario)
@@ -131,8 +132,12 @@ class UsuarioController {
             const { id } = req.params
             const usuario = await Usuario.findByPk(id)
 
+            if(!usuario) {
+                return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
+            }
+
             if (!(usuario.id === req.userId)) {
-                return res.status(403).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado' })
             }
 
             await usuario.update(req.body)
@@ -153,21 +158,21 @@ class UsuarioController {
             const { id } = req.params
             const usuario = await Usuario.findByPk(id)
 
-            if(!(usuario.id === req.userId)) {
-                return res.status(403).json({ erro: 'Acesso não autorizado' })
-            }
-
             if(!usuario) {
                 return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
             }
 
-            const localUsuario = await Local.findAll({
+            if(!(usuario.id === req.userId)) {
+                return res.status(401).json({ erro: 'Acesso não autorizado' })
+            }            
+
+            const destinoUsuario = await Destino.findAll({
                 where: {
                     usuario_id: id
                 }
             })
 
-            if (localUsuario.length > 0) {
+            if (destinoUsuario.length > 0) {
                 return res.status(400).json({erro: "Este usuário não pode ser excluído pois possui locais cadastrados."})
             }
 
