@@ -130,7 +130,7 @@ class DestinoController {
 
             await destino.update(req.body)
             await destino.save()
-            res.status(200).json({ mensagem: 'Alteração efetuada com sucesso.' })
+            res.status(200).json({ mensagem: 'Alterações efetuadas com sucesso.' })
 
         } catch (error) {
             res.status(500).json({ erro: 'Não foi possível atualizar o destino.' })            
