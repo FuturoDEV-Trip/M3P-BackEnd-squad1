@@ -1,6 +1,6 @@
 const Usuario = require('../models/Usuario')
 const { sign } = require('jsonwebtoken')
-const { compare } = require('bcrypt')
+const bcrypt = require('bcrypt')
 
 class LoginController {
     async logar(req, res) {
@@ -33,9 +33,8 @@ class LoginController {
                 return res.status(404).json({ erro: 'Email e senha não correspondem a nenhum usuário' })
             }
 
-            const hashSenha = await compare(password, usuario.password)
-            if(hashSenha === false) {
-
+            const hashSenha = await bcrypt.compare(password, usuario.password)
+            if(!hashSenha) {
                 return res.status(400).json({ mensagem: 'Senha inválida' })
             }
 

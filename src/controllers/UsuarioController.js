@@ -1,5 +1,6 @@
 const Usuario = require('../models/Usuario')
 const { consultaCep } = require('../utils/consultaCep')
+const bcrypt = require("bcrypt");
 
 
 class UsuarioController {
@@ -55,7 +56,22 @@ class UsuarioController {
                 return res.status(409).json({ mensagem: 'E-mail já cadastrado' })
             }           
 
-            const usuario = await Usuario.create(req.body)
+            const hash = await bcrypt.hash(password, 8);
+
+            const usuario = await Usuario.create({
+              nome,
+              sexo,
+              cpf,
+              cep,
+              numero,
+              email,
+              data_nascimento,
+              password: hash,
+              endereco,
+              bairro,
+              cidade,
+              estado
+            });
             await usuario.validate()
             await usuario.save()
 
