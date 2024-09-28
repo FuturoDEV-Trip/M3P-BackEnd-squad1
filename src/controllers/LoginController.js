@@ -39,7 +39,7 @@ class LoginController {
             }
 
             const payload = { sub: usuario.id, email: usuario.email, nome: usuario.nome }
-            const token = sign(payload, process.env.SECRET_JWT)
+            const token = sign(payload, process.env.SECRET_JWT, { expiresIn: '15m' })
 
             res.status(200).json({ Token: token })
 
