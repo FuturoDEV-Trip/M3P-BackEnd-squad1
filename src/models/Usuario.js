@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize')
 const { connection } = require('../database/connection')
 const cpfCheck = require('cpf-check')
-const { hash } = require('bcrypt')
 
 const Usuario = connection.define('usuarios', {
     nome: {
@@ -61,11 +60,6 @@ const Usuario = connection.define('usuarios', {
         type: DataTypes.STRING,
         allowNull: false
     }    
-})
-
-Usuario.beforeSave(async (usuario) => {    
-    usuario.password = await hash(usuario.password, 8)
-    return usuario    
 })
 
 module.exports = Usuario
