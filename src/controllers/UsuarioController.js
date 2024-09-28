@@ -35,7 +35,7 @@ class UsuarioController {
 
             if (!(nome || sexo || cpf || cep || numero
                 || email || data_nascimento || password)) {
-                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos' })
+                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos corretamente.' })
             }
 
             const cpfExistente = await Usuario.findOne({
@@ -50,10 +50,10 @@ class UsuarioController {
             })
 
             if (cpfExistente) {
-                return res.status(409).json({ mensagem: 'CPF já cadastrado' })
+                return res.status(400).json({ mensagem: 'CPF já cadastrado' })
             }
             if (emailExistente) {
-                return res.status(409).json({ mensagem: 'E-mail já cadastrado' })
+                return res.status(400).json({ mensagem: 'E-mail já cadastrado' })
             }           
 
             const hash = await bcrypt.hash(password, 8);
@@ -79,7 +79,7 @@ class UsuarioController {
 
         } catch (error) {      
             console.log(error.message)      
-            res.status(500).json({ erro: 'Não foi possível efetuar o cadastro do usuário, verifique os dados inseridos' })
+            res.status(500).json({ erro: 'Não foi possível efetuar o cadastro do usuário, verifique os dados inseridos.' })
         }        
     }
 
@@ -93,16 +93,16 @@ class UsuarioController {
             const usuario = await Usuario.findByPk(id)
 
             if (!usuario) {
-                return res.status(200).json({ erro: 'Usuário não encontrado'})
+                return res.status(404).json({ erro: 'Usuário não encontrado.'})
             }
             if (!(usuario.id === req.userId)) {
-                return res.status(403).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }
 
             res.status(200).json(usuario)
 
         } catch (error) {
-            res.status(500).json({ erro: 'Não foi possível encontrar usuário' })
+            res.status(500).json({ erro: 'Não foi possível encontrar usuário.' })
         }
     }
 
@@ -132,15 +132,15 @@ class UsuarioController {
             const usuario = await Usuario.findByPk(id)
 
             if (!(usuario.id === req.userId)) {
-                return res.status(403).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }
 
             await usuario.update(req.body)
             await usuario.save()
-            res.status(200).json({ mensagem: 'Alteração efetuada com sucesso' })
+            res.status(200).json({ mensagem: 'Alteração efetuada com sucesso.' })
 
         } catch (error) {
-            res.status(500).json({ erro: 'Não foi possível atualizar usuário' })
+            res.status(500).json({ erro: 'Não foi possível atualizar usuário.' })
         }
     }
 
@@ -154,11 +154,11 @@ class UsuarioController {
             const usuario = await Usuario.findByPk(id)
 
             if(!(usuario.id === req.userId)) {
-                return res.status(403).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }
 
             if(!usuario) {
-                return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
+                return res.status(404).json({erro: 'Nenhum usuário cadastrado com o id informado.'})
             }
 
             const localUsuario = await Local.findAll({
@@ -168,15 +168,15 @@ class UsuarioController {
             })
 
             if (localUsuario.length > 0) {
-                return res.status(400).json({erro: "Este usuário não pode ser excluído pois possui locais cadastrados."})
+                return res.status(400).json({erro: 'Este usuário não pode ser excluído pois possui locais cadastrados.'})
             }
 
             await usuario.destroy()
-            res.status(200).json({ mensagem: 'Usuário excluído com sucesso' })
+            res.status(200).json({ mensagem: 'Usuário excluído com sucesso.' })
 
         } catch (error) {
             console.log(error.message)
-            res.status(500).json({ erro: 'Não foi possível excluir usuário' })
+            res.status(500).json({ erro: 'Não foi possível excluir usuário.' })
         }
     }
 }

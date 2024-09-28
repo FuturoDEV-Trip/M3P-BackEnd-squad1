@@ -30,12 +30,12 @@ class LoginController {
                 where: { email: email }
             })
             if (!usuario) {
-                return res.status(404).json({ erro: 'Email e senha não correspondem a nenhum usuário' })
+                return res.status(401).json({ erro: 'Email e senha não correspondem a nenhum usuário.' })
             }
 
             const hashSenha = await bcrypt.compare(password, usuario.password)
             if(!hashSenha) {
-                return res.status(400).json({ mensagem: 'Senha inválida' })
+                return res.status(400).json({ mensagem: 'Senha inválida.' })
             }
 
             const payload = { sub: usuario.id, email: usuario.email, nome: usuario.nome }
@@ -45,7 +45,7 @@ class LoginController {
 
         } catch (error) {   
             console.log(error.message)         
-            return res.status(500).json({ erro: 'Solicitação não pôde ser atendida' })            
+            return res.status(500).json({ erro: 'Solicitação não pôde ser atendida.' })            
         }
     }
 }
