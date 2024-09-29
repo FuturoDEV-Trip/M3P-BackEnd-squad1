@@ -27,7 +27,7 @@ class DestinoController {
             const coordenadas_geo = req.body.coordenadas_geo           
 
             if (!(usuario_id || nome || descricao || cidade || pais || estado || coordenadas_geo)) {
-                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos' })
+                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos corretamente.' })
             }
 
             const coordenadasExistente = await Destino.findOne({
@@ -37,7 +37,7 @@ class DestinoController {
                 }
             })
             if (coordenadasExistente) {
-                return res.status(409).json({ mensagem: 'Coordenadas já foram cadastradas para o usuário' })
+                return res.status(400).json({ mensagem: 'Coordenadas já foram cadastradas para o usuário.' })
             }
             
             if (coordenadas_geo) {
@@ -48,7 +48,7 @@ class DestinoController {
                     req.body.estado = estado
                     req.body.pais = pais                    
                 } else {
-                    throw new Error('Não foi possível encontrar a cidade e estado para as coordenadas fornecidas')
+                    throw new Error('Não foi possível encontrar a cidade e estado para as coordenadas fornecidas.')
                 }
             }
 
@@ -58,7 +58,7 @@ class DestinoController {
             res.status(201).json(destino)
 
         } catch (error) {    
-            res.status(500).json({ erro: 'Não foi possível efetuar o cadastro do destino' })
+            res.status(500).json({ erro: 'Não foi possível efetuar o cadastro do destino.' })
         }
     }
 
@@ -91,14 +91,14 @@ class DestinoController {
             const destino = await Destino.findByPk(id)
 
             if (!(destino.usuario_id === req.userId)) {
-                return res.status(403).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }
 
             res.status(200).json(destino)
 
         } catch (error) {
             console.log(error.message)
-            res.status(500).json({ erro: 'Não foi possível listar o destino'})
+            res.status(500).json({ erro: 'Não foi possível listar o destino.'})
         }
     }
 
@@ -125,15 +125,15 @@ class DestinoController {
             const destino = await Destino.findByPk(id)
 
             if (!(destino.usuario_id === req.userId)) {
-                return res.status(403).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }
 
             await destino.update(req.body)
             await destino.save()
-            res.status(200).json({ mensagem: 'Alteração efetuada com sucesso' })
+            res.status(200).json({ mensagem: 'Alterações efetuadas com sucesso.' })
 
         } catch (error) {
-            res.status(500).json({ erro: 'Não foi possível atualizar destino' })            
+            res.status(500).json({ erro: 'Não foi possível atualizar o destino.' })            
         }
     }
 
@@ -147,14 +147,14 @@ class DestinoController {
             const destino = await Destino.findByPk(id)
 
             if(!(destino.usuario_id === req.userId)) {
-                return res.status(403).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }
 
             await destino.destroy()
-            res.status(200).json({ mensagem: 'Local excluído com sucesso' })
+            res.status(200).json({ mensagem: 'Local excluído com sucesso.' })
             
         } catch (error) {
-            res.status(500).json({ error: 'Não foi possível excluir o destino' })
+            res.status(500).json({ error: 'Não foi possível excluir o destino.' })
         }
     }
 
