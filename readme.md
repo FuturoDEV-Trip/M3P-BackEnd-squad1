@@ -117,8 +117,9 @@ developBack:
 Nossa base de produção para criar novas features
  
 *feature/EndPointsLogin - login e geração do token com validade git stat
-*feature/consultaCepCoordenadas - consulta de API viaCEP para usuarios
+*feature/consultaCepCoordenadas - consulta de API viaCEP para usuários
 *feature/padronizaStatusCode - padronização do status codes 
+*feature/listarAlterarDadosSensiveis - não permitir listar nem alterar CPF
 
   
 ## 🧑🏻‍🏫 Professores para auxilio
@@ -129,8 +130,6 @@ Nossa base de produção para criar novas features
 ## 👀 Melhorias
 
 - Outros usuários fazer comentário nos destinos de outros usuários.
-- Aprender a utilizar o npm e seus validators (npm i cpf-cnpj-validator -S)
-- Dar um tempo de expiração ao token, por exemplo de 1 hora
 - Fazer YUP
 - Alterar a URL automaticamente 
 
@@ -139,5 +138,5 @@ Nossa base de produção para criar novas features
 
 * O Floripa Mais Tec é uma iniciativa da Prefeitura de Florianópolis, em parceria com SENAI/SC, SEBRAE e ACATE, que visa democratizar o acesso ao ensino tecnológico para todos, oferecendo cursos de Tecnologia gratuitos!  📢;
 * Lab365 e todos os monitores;
-* Aos melhores colegas de equipe que poderiamos ter!!!
+* Aos melhores colegas de equipe que poderíamos ter!!!
 * Qualquer dúvida ou sugestão de melhorar o código eu aceito - algumas escrevi acima!!!
