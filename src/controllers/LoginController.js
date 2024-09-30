@@ -10,8 +10,8 @@ class LoginController {
                 in: 'body',
                 description: 'Login',
                 schema: {
-                    $email: 'gabrielly_catarina_costa@lins.net.br',
-                    $password: 'RnGLYZFgc4'
+                    $email: 'catarina_costa@lins.net.br',
+                    $password: '12345'
                 }
             }
         */

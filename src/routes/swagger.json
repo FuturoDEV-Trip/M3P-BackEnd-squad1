@@ -35,11 +35,11 @@
               "properties": {
                 "email": {
                   "type": "string",
-                  "example": "gabrielly_catarina_costa@lins.net.br"
+                  "example": "catarina_costa@lins.net.br"
                 },
                 "password": {
                   "type": "string",
-                  "example": "RnGLYZFgc4"
+                  "example": "12345"
                 }
               },
               "required": [
