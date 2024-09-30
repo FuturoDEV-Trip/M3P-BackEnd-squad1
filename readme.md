@@ -55,7 +55,7 @@ Para ter valores inciais no banco de dados será necessário rodar o comando aba
 
 ### Sempre que precisas rodar o repositório em ambiente local
 
-`npm run start:dev` - conexão bem sucedida!   ----    Conseguiu?
+`node src/index.js` - conexão bem sucedida!   ----    Conseguiu?
   
 ## 🤖 Como rodar o Swagger:
 
