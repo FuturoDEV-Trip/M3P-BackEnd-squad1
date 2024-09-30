@@ -107,6 +107,18 @@ Caso tenha alguma dúvida!!
 - JWT - utilizado para geração do token que utilizaremos nas autenticação das rotas privadas
 - Swagger - criar manualmente a documentação da API
 - Seeders - usadas para popular automaticamente o banco de dados com dados de teste ou dados iniciais
+- 
+## 🌊 GitFlow:
+
+Iniciei na main mesmo e organizei as pastas, deletei arquivos e iniciei limpo.
+
+developBack: 
+Nossa base de produção para criar novas features
+ 
+*feature/EndPointsLogin - login e geração do token com validade git stat
+*feature/consultaCepCoordenadas - consulta de API viaCEP para usuarios
+*feature/padronizaStatusCode - padronização do status codes 
+
 
   
 ## 🧑🏻‍🏫 Professores para auxilio
