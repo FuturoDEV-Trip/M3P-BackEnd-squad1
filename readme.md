@@ -25,7 +25,7 @@ A API Birdy deseja automatizar algumas ações de atendimento, criando um sistem
 ## 📉 Diagrama relacional
 
 <p>
-  <img src = "" alt="diagrama UML">
+  <img src = "./src/assets/diagrama.jpg" alt="diagrama UML">
 </p>
 
 ## 🤖 Como rodar o repositório:
