@@ -26,8 +26,8 @@ class DestinoController {
             const descricao = req.body.descricao
             const coordenadas_geo = req.body.coordenadas_geo           
 
-            if (!(usuario_id || nome || descricao || cidade || pais || estado || coordenadas_geo)) {
-                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos corretamente.' })
+            if (!(nome || descricao || coordenadas_geo)) {
+                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos' })
             }
 
             const coordenadasExistente = await Destino.findOne({
@@ -41,9 +41,10 @@ class DestinoController {
             }
             
             if (coordenadas_geo) {
-                const { cidade, estado, pais } = await consultaCidade(coordenadas_geo)
+                const { cep, cidade, estado, pais } = await consultaCidade(coordenadas_geo)
 
-                if (cidade && estado && pais) {
+                if (cep && cidade && estado && pais) {
+                    req.body.cep =cep
                     req.body.cidade = cidade
                     req.body.estado = estado
                     req.body.pais = pais                    
@@ -58,6 +59,7 @@ class DestinoController {
             res.status(201).json(destino)
 
         } catch (error) {    
+            console.error('Erro ao cadastrar destino:', error)
             res.status(500).json({ erro: 'Não foi possível efetuar o cadastro do destino.' })
         }
     }
@@ -89,6 +91,10 @@ class DestinoController {
         try {
             const { id } = req.params
             const destino = await Destino.findByPk(id)
+
+            if(!destino) {
+                return res.status(404).json({erro: "Nenhum destino cadastrado com o id informado."})
+            }
 
             if (!(destino.usuario_id === req.userId)) {
                 return res.status(401).json({ erro: 'Acesso não autorizado.' })
@@ -124,6 +130,10 @@ class DestinoController {
             const { id } = req.params
             const destino = await Destino.findByPk(id)
 
+            if(!destino) {
+                return res.status(404).json({erro: "Nenhum destino cadastrado com o id informado."})
+            }
+
             if (!(destino.usuario_id === req.userId)) {
                 return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }
@@ -145,6 +155,10 @@ class DestinoController {
         try {
             const { id } = req.params
             const destino = await Destino.findByPk(id)
+
+            if(!destino) {
+                return res.status(404).json({erro: "Nenhum destino cadastrado com o id informado."})
+            }
 
             if(!(destino.usuario_id === req.userId)) {
                 return res.status(401).json({ erro: 'Acesso não autorizado.' })
