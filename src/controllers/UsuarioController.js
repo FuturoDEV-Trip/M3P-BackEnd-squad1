@@ -7,10 +7,10 @@ class UsuarioController {
     async cadastrar(req, res) {
         /*
             #swagger.tags = ['Usuario'],
-            #swagger.description = 'Cadastra novo usuário, validação de duplicidade de email e cpf, busca endereço a partir do CEP informado',
+            #swagger.description = 'Cadastra novo usuário, validação de duplicidade de email e cpf, busca endereço a partir do CEP informado.',
             #swagger.parameters['body'] = {
                 in: 'body',
-                description: 'Cadastra novo usuário',
+                description: 'Cadastra novo usuário.',
                 schema: {
                     $nome: 'Catarina Márcia Costa',
                     $sexo: 'Feminino',
@@ -35,7 +35,7 @@ class UsuarioController {
 
             if (!(nome || sexo || cpf || cep || numero
                 || email || data_nascimento || password)) {
-                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos' })
+                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos.' })
             }
 
             const cpfExistente = await Usuario.findOne({
@@ -50,10 +50,10 @@ class UsuarioController {
             })
 
             if (cpfExistente) {
-                return res.status(409).json({ mensagem: 'CPF já cadastrado' })
+                return res.status(409).json({ mensagem: 'CPF já cadastrado.' })
             }
             if (emailExistente) {
-                return res.status(409).json({ mensagem: 'E-mail já cadastrado' })
+                return res.status(409).json({ mensagem: 'E-mail já cadastrado.' })
             }           
 
             const hash = await bcrypt.hash(password, 8);
@@ -79,7 +79,7 @@ class UsuarioController {
 
         } catch (error) {      
             console.log(error.message)      
-            res.status(500).json({ erro: 'Não foi possível efetuar o cadastro do usuário, verifique os dados inseridos' })
+            res.status(500).json({ erro: 'Não foi possível efetuar o cadastro do usuário, verifique os dados inseridos.' })
         }        
     }
 
@@ -110,20 +110,20 @@ class UsuarioController {
             }
 
             if (!(usuario.id === req.userId)) {
-                return res.status(401).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }
 
             res.status(200).json(usuario)
 
         } catch (error) {
-            res.status(500).json({ erro: 'Não foi possível encontrar usuário' })
+            res.status(500).json({ erro: 'Não foi possível encontrar usuário.' })
         }
     }
 
     async atualizar(req, res) {
         /*
             #swagger.tags = ['Usuario'],
-            #swagger.description = 'Atualiza dados do usuário autenticado',
+            #swagger.description = 'Atualiza dados do usuário autenticado.',
             #swagger.parameters['body'] = {
                 in: 'body',
                 description: 'Atualiza usuário',
@@ -163,15 +163,15 @@ class UsuarioController {
             }
 
             if (!(usuario.id === req.userId)) {
-                return res.status(401).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }
 
             await usuario.update(req.body)
             await usuario.save()
-            res.status(200).json({ mensagem: 'Alteração efetuada com sucesso' })
+            res.status(200).json({ mensagem: 'Alteração efetuada com sucesso.' })
 
         } catch (error) {
-            res.status(500).json({ erro: 'Não foi possível atualizar usuário' })
+            res.status(500).json({ erro: 'Não foi possível atualizar usuário.' })
         }
     }
 
@@ -189,7 +189,7 @@ class UsuarioController {
             }
 
             if(!(usuario.id === req.userId)) {
-                return res.status(401).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }            
 
             const destinoUsuario = await Destino.findAll({
@@ -203,11 +203,11 @@ class UsuarioController {
             }
 
             await usuario.destroy()
-            res.status(200).json({ mensagem: 'Usuário excluído com sucesso' })
+            res.status(200).json({ mensagem: 'Usuário excluído com sucesso.' })
 
         } catch (error) {
             console.log(error.message)
-            res.status(500).json({ erro: 'Não foi possível excluir usuário' })
+            res.status(500).json({ erro: 'Não foi possível excluir usuário.' })
         }
     }
 }
