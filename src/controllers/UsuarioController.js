@@ -7,10 +7,10 @@ class UsuarioController {
     async cadastrar(req, res) {
         /*
             #swagger.tags = ['Usuario'],
-            #swagger.description = 'Cadastra novo usuário, validação de duplicidade de email e cpf, busca endereço a partir do CEP informado',
+            #swagger.description = 'Cadastra novo usuário, validação de duplicidade de email e cpf, busca endereço a partir do CEP informado.',
             #swagger.parameters['body'] = {
                 in: 'body',
-                description: 'Cadastra novo usuário',
+                description: 'Cadastra novo usuário.',
                 schema: {
                     $nome: 'Catarina Márcia Costa',
                     $sexo: 'Feminino',
@@ -35,7 +35,7 @@ class UsuarioController {
 
             if (!(nome || sexo || cpf || cep || numero
                 || email || data_nascimento || password)) {
-                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos corretamente.' })
+                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos.' })
             }
 
             const cpfExistente = await Usuario.findOne({
@@ -50,10 +50,10 @@ class UsuarioController {
             })
 
             if (cpfExistente) {
-                return res.status(400).json({ mensagem: 'CPF já cadastrado' })
+                return res.status(409).json({ mensagem: 'CPF já cadastrado.' })
             }
             if (emailExistente) {
-                return res.status(400).json({ mensagem: 'E-mail já cadastrado' })
+                return res.status(409).json({ mensagem: 'E-mail já cadastrado.' })
             }           
 
             const hash = await bcrypt.hash(password, 8);
@@ -90,7 +90,20 @@ class UsuarioController {
             #swagger.description = 'Lista dados do usuário autenticado',
         */
             const { id } = req.params
-            const usuario = await Usuario.findByPk(id)
+            const usuario = await Usuario.findByPk(id, {
+                attributes: [
+                    'id', 
+                    'nome', 
+                    'sexo', 
+                    'data_nascimento', 
+                    'email', 
+                    'cep', 
+                    'endereco', 
+                    'numero', 
+                    'bairro', 
+                    'cidade', 
+                    'estado']
+            })
 
             if(!usuario) {
                 return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
@@ -110,7 +123,7 @@ class UsuarioController {
     async atualizar(req, res) {
         /*
             #swagger.tags = ['Usuario'],
-            #swagger.description = 'Atualiza dados do usuário autenticado',
+            #swagger.description = 'Atualiza dados do usuário autenticado.',
             #swagger.parameters['body'] = {
                 in: 'body',
                 description: 'Atualiza usuário',
@@ -130,7 +143,20 @@ class UsuarioController {
         */
         try {
             const { id } = req.params
-            const usuario = await Usuario.findByPk(id)
+            const usuario = await Usuario.findByPk(id, {
+                attributes: [
+                    'id', 
+                    'nome', 
+                    'sexo', 
+                    'data_nascimento', 
+                    'email', 
+                    'cep', 
+                    'endereco', 
+                    'numero', 
+                    'bairro', 
+                    'cidade', 
+                    'estado']
+            })
 
             if(!usuario) {
                 return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
@@ -159,11 +185,11 @@ class UsuarioController {
             const usuario = await Usuario.findByPk(id)
 
             if(!usuario) {
-                return res.status(404).json({erro: 'Nenhum usuário cadastrado com o id informado.'})
+                return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
             }
 
             if(!(usuario.id === req.userId)) {
-                return res.status(401).json({ erro: 'Acesso não autorizado' })
+                return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }            
 
             const destinoUsuario = await Destino.findAll({

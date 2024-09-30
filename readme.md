@@ -81,12 +81,21 @@ Caso tenha alguma dúvida!!
 - Token JWT - criado na rota login (email e senha do usuário) utilizado para autenticação das rotas privadas. Obs: Token com tempo de expiração de 15 minutos.
   
 - Tabela usuário:
-  Impor o preenchimento do nome, sexo, data_nascimento, endereco, cpf, email, senha
+  Impor o preenchimento nome, sexo, CPF, data de nascimento, e-mail, senha, CEP, endereço, numero, Bairro, cidade e estado - todos obrigatórios.
+  Cada usuário deve possuir um identificador único, incrementado automaticamente.
   CPF e email são único - não podem repetir nas colunas respectivas - cpf-check
+  Não pode listar dados sensíveis como CPF e senha de login.
+  Não pode editar o CPF.
+  Não pode deletar usuários com locais de visitação em viagens associadas.
+  Não pode cadastrar pessoas com o mesmo CPF.
+
 
 - Tabela destinos:
+  Informações do local: nome, descrição, localidade (CEP) e coordenadas geográficas, cidade e estado(UF)
   Nas rotas o id é extraído do seu token (feito no login)
   Cep é inserido e através dele extraído as coordenadas geograficas pela API externa (https://docs.awesomeapi.com.br/api-cep)
+  Cada usuário pode cadastrar um ou mais locais de visitação em viagens, fornecendo localização, e descrição do local.
+
 
   Para requisições geográficas:
 - axios
@@ -99,12 +108,11 @@ Caso tenha alguma dúvida!!
 
 - Trello - todos os passos que fiz para criar, roteiro da aplicação, regras de negócios e validações exigidas
 - VsCode - para formar o código em Node.js
-- GitHub - utilizando o GitFlow, criado a main, develop e algumas branches para desenvolver cada passo exigido (rotas, controllers, seeders, swagger, API externa para obter coordenadas geográficas a partir do CEP informado...)
+- GitHub - utilizando o GitFlow, criado a main, develop e algumas branches para desenvolver cada passo exigido 
 - Node.js 
 - Express - para execução do javascript como linguagem de back-end.
 - Sequelize - usado na formulação da migration, models, controllers, routes...
 - Postgres - utilizado como Banco de dados.
-- Postman - Utilizado para criar, compartilhar, testar e documentar APIs
 - JWT - utilizado para geração do token que utilizaremos nas autenticação das rotas privadas
 - Swagger - criar manualmente a documentação da API
 - Seeders - usadas para popular automaticamente o banco de dados com dados de teste ou dados iniciais
@@ -117,8 +125,9 @@ developBack:
 Nossa base de produção para criar novas features
  
 *feature/EndPointsLogin - login e geração do token com validade git stat
-*feature/consultaCepCoordenadas - consulta de API viaCEP para usuarios
+*feature/consultaCepCoordenadas - consulta de API viaCEP para usuários
 *feature/padronizaStatusCode - padronização do status codes 
+*feature/listarAlterarDadosSensiveis - não permitir listar nem alterar CPF
 
   
 ## 🧑🏻‍🏫 Professores para auxilio
@@ -129,8 +138,6 @@ Nossa base de produção para criar novas features
 ## 👀 Melhorias
 
 - Outros usuários fazer comentário nos destinos de outros usuários.
-- Aprender a utilizar o npm e seus validators (npm i cpf-cnpj-validator -S)
-- Dar um tempo de expiração ao token, por exemplo de 1 hora
 - Fazer YUP
 - Alterar a URL automaticamente 
 
@@ -139,5 +146,5 @@ Nossa base de produção para criar novas features
 
 * O Floripa Mais Tec é uma iniciativa da Prefeitura de Florianópolis, em parceria com SENAI/SC, SEBRAE e ACATE, que visa democratizar o acesso ao ensino tecnológico para todos, oferecendo cursos de Tecnologia gratuitos!  📢;
 * Lab365 e todos os monitores;
-* Aos melhores colegas de equipe que poderiamos ter!!!
+* Aos melhores colegas de equipe que poderíamos ter!!!
 * Qualquer dúvida ou sugestão de melhorar o código eu aceito - algumas escrevi acima!!!
