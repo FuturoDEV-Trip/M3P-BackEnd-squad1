@@ -1,6 +1,6 @@
 <p align="center">
   <img src="./src/assets/Birdyverde.png" width="15%" alt="Logo da Birdy" style="vertical-align: middle;"/>
-  <h1> 🪽 Birdy: Viaje leve, seja sustentável,  colecione histórias!
+  <h1> 🪽 Birdy: Viaje leve, seja sustentável,  colecione histórias! </h1>
 
 
    A Birdy é uma plataforma que visa promover viagens sustentáveis e experiências positivas para os usuários, fornecendo acesso a informações sobre destinos turísticos, praias, atrações naturais e atividades recreativas os quais os usuários poderão cadastrá-los em cada viagens que fizerem. Também podem explorar e descobrir novos destinos, encontrar dicas de viagem sustentável, com as experiências de outros viajantes.
