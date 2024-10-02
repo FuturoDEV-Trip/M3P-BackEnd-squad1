@@ -32,7 +32,7 @@ Clone o repositório em sua máquina em uma pasta local
 `Git clone https://github.com/FuturoDEV-Trip/M3P-BackEnd-squad1.git`
 
 
-### ≈IMPORTANTE!!!!! Na primeira vez é necessário instalar as dependências:
+### ⚠️IMPORTANTE!!!!! Na primeira vez é necessário instalar as dependências:
 
 1. `npm install`
 2. Se for em ambiente local: `npm install --dev`
@@ -124,10 +124,15 @@ Começamos pela main organizando as pastas, deletando arquivos desnecessários e
 Nossa base de desenvolvimento para criação de novas features.
 
 **feature/EndPointsLogin** - implementação do login e geração do token com validade.
+
 **feature/consultaCepCoordenadas** - integração com a API viaCEP para consulta de endereços e coordenadas pelos usuários.
+
 **feature/padronizaStatusCode** - padronização dos status codes nas respostas da API.
+
 **feature/listarAlterarDadosSensiveis** - implementação de regras para impedir a listagem e alteração de informações sensíveis como CPF.
+
 **feature/readmeDiagrama** - adição do diagrama UML ao README e correção de código para permitir que o usuário atualize a senha.
+
 **feature/readmeRevisao** - revisão e correções.
   
 ## 🧑🏻‍🏫 Professores para auxilio
