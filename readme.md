@@ -11,7 +11,7 @@ O aplicativo permitirá aos usuários explorar novos destinos e experiências, d
   
 ## 🏦 Módulo 1 - Projeto Avaliativo
 
-Este repositório se baseia em um projeto avaliativo do curso FuturoDev o qual faço parte da turma TRIP com entrega no dia 17/05/2024 encerrando o primeiro módulo.
+Este repositório se baseia em um projeto avaliativo do curso FuturoDev 14/10/2024 encerrando o terceiro módulo com sua integração ao projeto frontEnd.
 Seguindo um roteiro e aplicando as regras de negócio e rotas que devem ser criadas na aplicação com todas as regras de entrega do projeto avaliativo.
 
 **Objetivo: Montagem e execução de uma aplicação Back-End, que deverá ser uma API Rest, codificada com uso do Node, Express e PostgreSQL - Software MVP**
