@@ -35,8 +35,7 @@ Clone o repositório em sua máquina em uma pasta local
 ### ⚠️IMPORTANTE!!!!! Na primeira vez é necessário instalar as dependências:
 
 1. `npm install`
-2. Se for em ambiente local: `npm install --dev`
-3. No documento criado de nome **.env**, rode no terminal: `cp .env_exemple .env` e configure com seus dados conforme a descrição e salve.
+2. No documento criado de nome **.env**, rode no terminal: `cp .env_exemple .env` e configure com seus dados conforme a descrição e salve.
 
  ## 🏗️ Gere as estruturas das tabelas rodando a migration:
 
