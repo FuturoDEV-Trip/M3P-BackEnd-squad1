@@ -1,6 +1,6 @@
 
 <p>
-  <img src = "" alt="Logo da Birdy">
+  <img src = "./src/assets/Birdyverde.png" alt="Logo da Birdy">
 </p>
 
 
@@ -128,7 +128,7 @@ Nossa base de produção para criar novas features
 *feature/consultaCepCoordenadas - consulta de API viaCEP para usuários
 *feature/padronizaStatusCode - padronização do status codes 
 *feature/listarAlterarDadosSensiveis - não permitir listar nem alterar CPF
-
+*feature/diagramaUml - Adicionado diagrama ao README e correção do código onde usuário pode atualizar a senha 
   
 ## 🧑🏻‍🏫 Professores para auxilio
 
