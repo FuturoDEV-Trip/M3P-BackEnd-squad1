@@ -7,7 +7,7 @@ class HomeController {
         #swagger.path = '/',
         #swagger.method = 'get',
         #swagger.tags = ['Home'],
-        #swagger.description: 'Retorna o número de usuários que estão ativos (status = true).'
+        #swagger.description= 'Retorna o número de usuários que estão ativos (status = true).'
     */
     try {
       const usuariosAtivos = await Usuario.findAndCountAll({
@@ -25,7 +25,7 @@ class HomeController {
         #swagger.path = '/:id',
         #swagger.method = 'put',    
         #swagger.tags = ['Home'],
-        #swagger.description: 'Desativa o status de um usuário ao realizar o logout.'
+        #swagger.description= 'Desativa o status de um usuário ao realizar o logout.',
     */
     try {
       const { id } = req.params;
@@ -55,7 +55,7 @@ class HomeController {
         #swagger.path = '/listarDestinos',
         #swagger.method = 'get',
         #swagger.tags = ['Home'],
-        #swagger.description: 'Retorna a contagem total de destinos no sistema.'
+        #swagger.description= 'Retorna a contagem total de destinos no sistema.'
     */
     try {
       const { id } = req.params;
@@ -72,7 +72,7 @@ class HomeController {
         #swagger.path = '/totalDestinos',
         #swagger.method = 'get',
         #swagger.tags = ['Home'],
-        #swagger.description: 'Retorna uma lista de todos os destinos disponíveis.'
+        #swagger.description= 'Retorna uma lista de todos os destinos disponíveis.'
     */
     try {
       const destinos = await Destino.findAll();
