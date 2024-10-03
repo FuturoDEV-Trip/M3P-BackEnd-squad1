@@ -6,7 +6,7 @@ class DestinoController {
     /*
         #swagger.path = '/',
         #swagger.method = 'post', 
-        #swagger.tags = ['Local'],
+        #swagger.tags = ['Destino'],
         #swagger.description = 'Cadastra novo local, buscando a cidade e o estado pelas coordenadas informadas, pelo usuário autenticado',
         #swagger.parameters['body'] = {
             in: 'body',
@@ -78,7 +78,7 @@ class DestinoController {
     /*
         #swagger.path = '/',
         #swagger.method = 'get',
-        #swagger.tags = ['Local'],
+        #swagger.tags = ['Destino'],
         #swagger.description = 'Lista todos os locais cadastrados pelo usuário autenticado'
     */
     try {
@@ -126,7 +126,7 @@ class DestinoController {
     /*
         #swagger.path = '/:id',
         #swagger.method = 'put',
-        #swagger.tags = ['Local'],
+        #swagger.tags = ['Destino'],
         #swagger.description = 'Atualiza dados do local cadastrado pelo usuário autenticado',
         #swagger.parameters['body'] = {
             in: 'body',
@@ -168,7 +168,7 @@ class DestinoController {
     /*
             #swagger.path = '/:id',
             #swagger.method = 'delete',
-            #swagger.tags = ['Local'],
+            #swagger.tags = ['Destino'],
             #swagger.description = 'Exclui local cadastrado pelo usuário autenticado'
         */
     try {
