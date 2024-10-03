@@ -41,7 +41,7 @@ class DestinoController {
       });
       if (coordenadasExistente) {
         return res.status(400).json({
-          mensagem: "Coordenadas já foram cadastradas para o usuário.",
+          mensagem: "Coordenadas já foram cadastradas para este usuário.",
         });
       }
 
@@ -98,7 +98,7 @@ class DestinoController {
     /*
         #swagger.path = '/:id',
         #swagger.method = 'get',
-        #swagger.tags = ['Local'],
+        #swagger.tags = ['Destino'],
         #swagger.description = 'Lista local específico cadastrado pelo usuário autenticado'
     */
     try {
