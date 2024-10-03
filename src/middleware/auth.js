@@ -7,12 +7,6 @@ async function auth(req, res, next) {
 
         const payload = verify(authorization, process.env.SECRET_JWT)
 
-        const usuario = await Usuario.findByPk(payload.sub);
-        if (usuario && !usuario.status) {
-          usuario.status = true;
-          await usuario.save();
-        }
-
         req.userId = payload.sub
     
         next()
