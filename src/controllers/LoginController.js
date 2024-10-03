@@ -4,17 +4,19 @@ const bcrypt = require('bcrypt')
 
 class LoginController {
     async logar(req, res) {
-                /*
-            #swagger.tags = ['Login'],
-            #swagger.parameters['body'] = {
-                in: 'body',
-                description: 'Login',
-                schema: {
-                    $email: 'catarina_costa@lins.net.br',
-                    $password: '12345'
-                }
+    /*
+        #swagger.path = '/',
+        #swagger.method = 'post',
+        #swagger.tags = ['Login'],
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Login',
+            schema: {
+                $email: 'catarina_costa@lins.net.br',
+                $password: '12345'
             }
-        */
+        }
+    */
         try {
             const email = req.body.email
             const password = req.body.password

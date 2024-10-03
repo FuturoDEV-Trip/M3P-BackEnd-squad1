@@ -6,6 +6,8 @@ const Destino = require('../models/Destino')
 class UsuarioController {
     async cadastrar(req, res) {
         /*
+            #swagger.path = '/',
+            #swagger.method = 'post',
             #swagger.tags = ['Usuario'],
             #swagger.description = 'Cadastra novo usuário, validação de duplicidade de email e cpf, busca endereço a partir do CEP informado.',
             #swagger.parameters['body'] = {
@@ -85,11 +87,13 @@ class UsuarioController {
     }
 
     async listar(req, res) {
-        try {
-            /*
+        /*
+            #swagger.path = '/:id',
+            #swagger.method = 'get',
             #swagger.tags = ['Usuario'],
             #swagger.description = 'Lista dados do usuário autenticado',
         */
+        try {
             const { id } = req.params
             const usuario = await Usuario.findByPk(id, {
                 attributes: [
@@ -123,6 +127,8 @@ class UsuarioController {
 
     async atualizar(req, res) {
         /*
+            #swagger.path = '/:id',
+            #swagger.method = 'put',
             #swagger.tags = ['Usuario'],
             #swagger.description = 'Atualiza dados do usuário autenticado.',
             #swagger.parameters['body'] = {
@@ -178,6 +184,8 @@ class UsuarioController {
 
     async excluir(req, res) {
         /*
+            #swagger.path = '/:id',
+            #swagger.method = 'delete',
             #swagger.tags = ['Usuario'],
             #swagger.description = 'Exclui usuário autenticado, desde que não tenha locais cadastrados',
         */
