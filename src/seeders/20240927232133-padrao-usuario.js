@@ -17,7 +17,8 @@ module.exports = {
         numero: '786',
         bairro: 'Caçari',
         cidade: 'Boa Vista',
-        estado: 'Roraima',        
+        estado: 'Roraima', 
+        status: 'false',       
         createdAt: new Date,
         updatedAt: new Date
       },
@@ -33,7 +34,8 @@ module.exports = {
         numero: '993',
         bairro: 'Vila Nunes',
         cidade: 'Lorena',
-        estado: 'São Paulo',   
+        estado: 'São Paulo', 
+        status: 'false',    
         createdAt: new Date,
         updatedAt: new Date
       },
@@ -49,7 +51,8 @@ module.exports = {
         numero: '110',
         bairro: 'Plano Diretor Sul',
         cidade: 'Palmas',
-        estado: 'Tocantins',   
+        estado: 'Tocantins', 
+        status: 'false',    
         createdAt: new Date,
         updatedAt: new Date
       },
@@ -65,7 +68,8 @@ module.exports = {
         numero: '663',
         bairro: 'Cambará',
         cidade: 'Boa Vista',
-        estado: 'Roraima',   
+        estado: 'Roraima', 
+        status: 'false',    
         createdAt: new Date,
         updatedAt: new Date
       },
@@ -81,7 +85,8 @@ module.exports = {
         numero: '497',
         bairro: 'Conjunto Esperança',
         cidade: 'Rio Branco',
-        estado: 'Acre',   
+        estado: 'Acre', 
+        status: 'false',    
         createdAt: new Date,
         updatedAt: new Date
       }
