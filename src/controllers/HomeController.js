@@ -6,7 +6,7 @@ class HomeController {
     /*
         #swagger.path = '/',
         #swagger.method = 'get',
-        #swagger.tags = ['Usuário'],
+        #swagger.tags = ['Home'],
         #swagger.description: 'Retorna o número de usuários que estão ativos (status = true).'
     */
     try {
@@ -24,7 +24,7 @@ class HomeController {
      /*
         #swagger.path = '/:id',
         #swagger.method = 'put',    
-        #swagger.tags = ['Usuário'],
+        #swagger.tags = ['Home'],
         #swagger.description: 'Desativa o status de um usuário ao realizar o logout.'
     */
     try {
@@ -54,7 +54,7 @@ class HomeController {
      /*
         #swagger.path = '/listarDestinos',
         #swagger.method = 'get',
-        #swagger.tags = ['Local'],
+        #swagger.tags = ['Home'],
         #swagger.description: 'Retorna a contagem total de destinos no sistema.'
     */
     try {
@@ -71,7 +71,7 @@ class HomeController {
     /*
         #swagger.path = '/totalDestinos',
         #swagger.method = 'get',
-        #swagger.tags = ['Local'],
+        #swagger.tags = ['Home'],
         #swagger.description: 'Retorna uma lista de todos os destinos disponíveis.'
     */
     try {
