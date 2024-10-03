@@ -100,7 +100,7 @@ class UsuarioController {
                     'nome', 
                     'sexo', 
                     'data_nascimento', 
-                    'email', 
+                    'email',                    
                     'cep', 
                     'endereco', 
                     'numero', 
