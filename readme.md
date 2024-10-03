@@ -76,30 +76,30 @@ Caso tenha alguma dúvida!!
 
 - Token JWT - criado na rota login (email e senha do usuário) utilizado para autenticação das rotas privadas. Obs: Token com tempo de expiração de 15 minutos.
   
-- Tabela usuário:
-  Impor o preenchimento nome, sexo, CPF, data de nascimento, e-mail, senha, CEP, endereço, numero, Bairro, cidade e estado - todos obrigatórios.
-  Cada usuário deve possuir um identificador único, incrementado automaticamente.
-  CPF e email são único - não podem repetir nas colunas respectivas - cpf-check
-  Não pode listar dados sensíveis como CPF e senha de login.
-  Não pode editar o CPF.
-  Não pode deletar usuários com locais de visitação em viagens associadas.
-  Não pode cadastrar pessoas com o mesmo CPF.
-  Não pode cadastrar pessoas com o mesmo e-mail.
+- Tabela usuário:\
+  Impor o preenchimento nome, sexo, CPF, data de nascimento, e-mail, senha, CEP, endereço, numero, Bairro, cidade e estado - todos obrigatórios.\
+  Cada usuário deve possuir um identificador único, incrementado automaticamente.\
+  CPF e email são único - não podem repetir nas colunas respectivas - cpf-check\
+  Não pode listar dados sensíveis como CPF e senha de login.\
+  Não pode editar o CPF.\
+  Não pode deletar usuários com locais de visitação em viagens associadas.\
+  Não pode cadastrar pessoas com o mesmo CPF.\
+  Não pode cadastrar pessoas com o mesmo e-mail.\
 
 
-- Tabela destinos:
-  Informações do local: nome, descrição, localidade (CEP) e coordenadas geográficas, cidade e estado(UF)
-  Nas rotas o id é extraído do seu token (feito no login)
-  Com as coordenadas geograficas preenchidas, é feito a busca dos dados do local como, cep, cidade, estado e país, pela API externa nominatim-geocodere
-  Cada usuário pode cadastrar um ou mais locais de visitação em viagens, fornecendo localização, e descrição do local.
-
-
-  Para requisições geográficas:
-- axios
-- nominatim-geocodere colocada no banco de dados daquele destino.
-
+- Tabela destinos:\
+  Informações do local: nome, descrição, localidade (CEP) e coordenadas geográficas, cidade e estado(UF)\
+  Nas rotas o id é extraído do seu token (feito no login)\
+  Com as coordenadas geograficas preenchidas, é feito a busca dos dados do local como, cep, cidade, estado e país, pela API externa nominatim-geocodere\
+  Cada usuário pode cadastrar um ou mais locais de visitação em viagens, fornecendo localização, e descrição do local.\
 
   Somente o usuário daquele destino pode atualizar ou deletar seu(s) destino (s) cadastrado(s).
+
+
+
+  **Para requisições geográficas:**
+- axios
+- nominatim-geocodere colocada no banco de dados daquele destino.
   
 ## 🛠️ Construído com
 
@@ -124,7 +124,7 @@ Nossa base de desenvolvimento para criação de novas features.
 
 **feature/EndPointsLogin** - implementação do login e geração do token com validade.
 
-**feature/consultaCepCoordenadas** - integração com a API viaCEP para consulta de endereços e coordenadas pelos usuários.
+**feature/consultaCepCoordenadas** - integração com a API viaCEP para consulta de endereços pelos usuários - com as coordenadas se obtém os dados da localidade.
 
 **feature/padronizaStatusCode** - padronização dos status codes nas respostas da API.
 
@@ -133,6 +133,8 @@ Nossa base de desenvolvimento para criação de novas features.
 **feature/readmeDiagrama** - adição do diagrama UML ao README e correção de código para permitir que o usuário atualize a senha.
 
 **feature/readmeRevisao** - revisão e correções.
+
+**feature/endPointHome** - Adicionado campo status no usuario, rota Home e obter total de usuários ativos.
   
 ## 🧑🏻‍🏫 Professores para auxilio
 
