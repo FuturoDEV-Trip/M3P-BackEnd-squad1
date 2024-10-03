@@ -6,6 +6,8 @@ const Destino = require('../models/Destino')
 class UsuarioController {
     async cadastrar(req, res) {
         /*
+            #swagger.path = '/',
+            #swagger.method = 'post',
             #swagger.tags = ['Usuario'],
             #swagger.description = 'Cadastra novo usuário, validação de duplicidade de email e cpf, busca endereço a partir do CEP informado.',
             #swagger.parameters['body'] = {
@@ -25,7 +27,7 @@ class UsuarioController {
         */
         try {
             const { nome, sexo, cpf, cep, numero,
-                email, data_nascimento, password } = req.body            
+                email, data_nascimento, password, status } = req.body            
 
             const { endereco, bairro, cidade, estado } = await consultaCep(cep)  
             req.body.endereco = endereco  
@@ -56,7 +58,7 @@ class UsuarioController {
                 return res.status(409).json({ mensagem: 'E-mail já cadastrado.' })
             }           
 
-            const hash = await bcrypt.hash(password, 8);
+            const hash = await bcrypt.hash(password, 8)
 
             const usuario = await Usuario.create({
               nome,
@@ -70,25 +72,27 @@ class UsuarioController {
               endereco,
               bairro,
               cidade,
-              estado
+              estado,
+              status: false
             });
             await usuario.validate()
             await usuario.save()
 
             res.status(201).json(usuario)
 
-        } catch (error) {      
-            console.log(error.message)      
+        } catch (error) {          
             res.status(500).json({ erro: 'Não foi possível efetuar o cadastro do usuário, verifique os dados inseridos.' })
         }        
     }
 
     async listar(req, res) {
-        try {
-            /*
+        /*
+            #swagger.path = '/:id',
+            #swagger.method = 'get',
             #swagger.tags = ['Usuario'],
             #swagger.description = 'Lista dados do usuário autenticado',
         */
+        try {
             const { id } = req.params
             const usuario = await Usuario.findByPk(id, {
                 attributes: [
@@ -106,7 +110,7 @@ class UsuarioController {
             })
 
             if(!usuario) {
-                return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
+                return res.status(404).json({erro: 'Nenhum usuário cadastrado com o id informado.'})
             }
 
             if (!(usuario.id === req.userId)) {
@@ -122,6 +126,8 @@ class UsuarioController {
 
     async atualizar(req, res) {
         /*
+            #swagger.path = '/:id',
+            #swagger.method = 'put',
             #swagger.tags = ['Usuario'],
             #swagger.description = 'Atualiza dados do usuário autenticado.',
             #swagger.parameters['body'] = {
@@ -130,9 +136,7 @@ class UsuarioController {
                 schema: {
                     nome: 'Gabrielly Catarina Márcia Costa',
                     sexo: 'Feminino',                    
-                    data_nascimento: '1980-03-03',
-                    email: 'gabrielly_catarina_costa@lins.net.br',
-                    password: 'RnGLYZFgc4',                   
+                    data_nascimento: '1980-03-03',                  
                     cep: '69307540',
                     endereco: 'Rua da Tamarineira',
                     numero: '786',
@@ -150,8 +154,6 @@ class UsuarioController {
                     'nome', 
                     'sexo', 
                     'data_nascimento', 
-                    'email',
-                    'password', 
                     'cep', 
                     'endereco', 
                     'numero', 
@@ -161,7 +163,7 @@ class UsuarioController {
             })
 
             if(!usuario) {
-                return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
+                return res.status(404).json({erro: 'Nenhum usuário cadastrado com o id informado.'})
             }
 
             if (!(usuario.id === req.userId)) {
@@ -169,7 +171,6 @@ class UsuarioController {
             }
 
             await usuario.update(req.body)
-            await usuario.save()
             res.status(200).json({ mensagem: 'Alteração efetuada com sucesso.' })
 
         } catch (error) {
@@ -179,6 +180,8 @@ class UsuarioController {
 
     async excluir(req, res) {
         /*
+            #swagger.path = '/:id',
+            #swagger.method = 'delete',
             #swagger.tags = ['Usuario'],
             #swagger.description = 'Exclui usuário autenticado, desde que não tenha locais cadastrados',
         */
@@ -187,7 +190,7 @@ class UsuarioController {
             const usuario = await Usuario.findByPk(id)
 
             if(!usuario) {
-                return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
+                return res.status(404).json({erro: 'Nenhum usuário cadastrado com o id informado.'})
             }
 
             if(!(usuario.id === req.userId)) {
@@ -201,14 +204,13 @@ class UsuarioController {
             })
 
             if (destinoUsuario.length > 0) {
-                return res.status(400).json({erro: "Este usuário não pode ser excluído pois possui locais cadastrados."})
+                return res.status(400).json({erro: 'Este usuário não pode ser excluído pois possui locais cadastrados.'})
             }
 
             await usuario.destroy()
             res.status(200).json({ mensagem: 'Usuário excluído com sucesso.' })
 
         } catch (error) {
-            console.log(error.message)
             res.status(500).json({ erro: 'Não foi possível excluir usuário.' })
         }
     }

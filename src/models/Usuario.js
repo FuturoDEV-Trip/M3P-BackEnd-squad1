@@ -59,7 +59,11 @@ const Usuario = connection.define('usuarios', {
     estado: {
         type: DataTypes.STRING,
         allowNull: false
-    }    
+    },
+    status: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    }
 })
 
 module.exports = Usuario
