@@ -137,8 +137,7 @@ class UsuarioController {
                 schema: {
                     nome: 'Gabrielly Catarina Márcia Costa',
                     sexo: 'Feminino',                    
-                    data_nascimento: '1980-03-03',
-                    email: 'gabrielly_catarina_costa@lins.net.br',                    
+                    data_nascimento: '1980-03-03',                  
                     cep: '69307540',
                     endereco: 'Rua da Tamarineira',
                     numero: '786',
@@ -156,7 +155,6 @@ class UsuarioController {
                     'nome', 
                     'sexo', 
                     'data_nascimento', 
-                    'email', 
                     'cep', 
                     'endereco', 
                     'numero', 
