@@ -80,8 +80,7 @@ class UsuarioController {
 
             res.status(201).json(usuario)
 
-        } catch (error) {      
-            console.log(error.message)      
+        } catch (error) {          
             res.status(500).json({ erro: 'Não foi possível efetuar o cadastro do usuário, verifique os dados inseridos.' })
         }        
     }
@@ -172,7 +171,6 @@ class UsuarioController {
             }
 
             await usuario.update(req.body)
-            await usuario.save()
             res.status(200).json({ mensagem: 'Alteração efetuada com sucesso.' })
 
         } catch (error) {
@@ -213,7 +211,6 @@ class UsuarioController {
             res.status(200).json({ mensagem: 'Usuário excluído com sucesso.' })
 
         } catch (error) {
-            console.log(error.message)
             res.status(500).json({ erro: 'Não foi possível excluir usuário.' })
         }
     }
