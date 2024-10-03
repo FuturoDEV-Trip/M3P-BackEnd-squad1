@@ -27,7 +27,7 @@ class DestinoController {
             const coordenadas_geo = req.body.coordenadas_geo           
 
             if (!(nome || descricao || coordenadas_geo)) {
-                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos' })
+                return res.status(400).json({ erro: 'Todos os campos devem ser preenchidos.' })
             }
 
             const coordenadasExistente = await Destino.findOne({
@@ -79,7 +79,7 @@ class DestinoController {
             res.status(200).json(destinos)
 
         } catch (error) {
-            res.status(500).json({ erro: 'Não foi possível listar os destinos'})
+            res.status(500).json({ erro: 'Não foi possível listar os destinos.'})
         }
     }
 
@@ -157,7 +157,7 @@ class DestinoController {
             const destino = await Destino.findByPk(id)
 
             if(!destino) {
-                return res.status(404).json({erro: "Nenhum destino cadastrado com o id informado."})
+                return res.status(404).json({erro: 'Nenhum destino cadastrado com o id informado.'})
             }
 
             if(!(destino.usuario_id === req.userId)) {

@@ -25,7 +25,7 @@ class UsuarioController {
         */
         try {
             const { nome, sexo, cpf, cep, numero,
-                email, data_nascimento, password } = req.body            
+                email, data_nascimento, password, status } = req.body            
 
             const { endereco, bairro, cidade, estado } = await consultaCep(cep)  
             req.body.endereco = endereco  
@@ -56,7 +56,7 @@ class UsuarioController {
                 return res.status(409).json({ mensagem: 'E-mail já cadastrado.' })
             }           
 
-            const hash = await bcrypt.hash(password, 8);
+            const hash = await bcrypt.hash(password, 8)
 
             const usuario = await Usuario.create({
               nome,
@@ -70,7 +70,8 @@ class UsuarioController {
               endereco,
               bairro,
               cidade,
-              estado
+              estado,
+              status: false
             });
             await usuario.validate()
             await usuario.save()
@@ -106,7 +107,7 @@ class UsuarioController {
             })
 
             if(!usuario) {
-                return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
+                return res.status(404).json({erro: 'Nenhum usuário cadastrado com o id informado.'})
             }
 
             if (!(usuario.id === req.userId)) {
@@ -159,7 +160,7 @@ class UsuarioController {
             })
 
             if(!usuario) {
-                return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
+                return res.status(404).json({erro: 'Nenhum usuário cadastrado com o id informado.'})
             }
 
             if (!(usuario.id === req.userId)) {
@@ -185,7 +186,7 @@ class UsuarioController {
             const usuario = await Usuario.findByPk(id)
 
             if(!usuario) {
-                return res.status(404).json({erro: "Nenhum usuário cadastrado com o id informado."})
+                return res.status(404).json({erro: 'Nenhum usuário cadastrado com o id informado.'})
             }
 
             if(!(usuario.id === req.userId)) {
@@ -199,7 +200,7 @@ class UsuarioController {
             })
 
             if (destinoUsuario.length > 0) {
-                return res.status(400).json({erro: "Este usuário não pode ser excluído pois possui locais cadastrados."})
+                return res.status(400).json({erro: 'Este usuário não pode ser excluído pois possui locais cadastrados.'})
             }
 
             await usuario.destroy()

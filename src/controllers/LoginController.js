@@ -20,10 +20,10 @@ class LoginController {
             const password = req.body.password
            
             if (!email) {
-                return res.status(400).json({ erro: 'Informe o email' })
+                return res.status(400).json({ erro: 'Informe seu email.' })
             }
             if (!password) {
-                return res.status(400).json({ erro: 'Informe a senha' })
+                return res.status(400).json({ erro: 'Informe sua senha.' })
             }
 
             const usuario = await Usuario.findOne({
@@ -37,6 +37,9 @@ class LoginController {
             if(!hashSenha) {
                 return res.status(400).json({ mensagem: 'Senha inválida.' })
             }
+
+            usuario.status = true;
+            await usuario.save()
 
             const payload = { sub: usuario.id, email: usuario.email, nome: usuario.nome }
             const token = sign(payload, process.env.SECRET_JWT, { expiresIn: '15m' })
