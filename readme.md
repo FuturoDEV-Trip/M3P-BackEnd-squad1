@@ -110,6 +110,7 @@ Caso tenha alguma dúvida!!
 - Express - responsável por gerenciar a execução do código JavaScript no back-end.
 - Sequelize - utilizado para a criação de migrations, models, controllers e rotas.
 - Postgres - escolhido como o banco de dados.
+- Postman - Utilizado para criar, compartilhar, testar e documentar APIs. Collection adicionada na pasta 'Documentation'
 - JWT - utilizado para gerar tokens para autenticação nas rotas privadas.
 - Swagger - usado para criar manualmente a documentação da API.
 - Seeders - utilizados para popular automaticamente o banco de dados com dados de teste ou iniciais.
@@ -133,6 +134,7 @@ Nossa base de desenvolvimento para criação de novas features.
 **feature/readmeDiagrama** - adição do diagrama UML ao README e correção de código para permitir que o usuário atualize a senha.
 
 **feature/readmeRevisao** - revisão e correções.
+
   
 ## 🧑🏻‍🏫 Professores para auxilio
 
