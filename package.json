@@ -24,7 +24,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "swagger": "node ./swagger.js"
+    "swagger": "node ./swagger.js",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "db:seed": "npx sequelize-cli db:seed:all",
+    "start:with-migrations": "npm run db:migrate && npm run db:seed && npm run start"
   },
   "keywords": [],
   "author": "",
