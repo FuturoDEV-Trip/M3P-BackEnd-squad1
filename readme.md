@@ -135,6 +135,8 @@ Nossa base de desenvolvimento para criação de novas features.
 
 **feature/readmeRevisao** - revisão e correções.
 
+**feature/configSSL** - Configuração SSL para deploy.
+
   
 ## 🧑🏻‍🏫 Professores para auxilio
 
