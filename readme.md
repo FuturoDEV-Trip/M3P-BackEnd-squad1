@@ -135,6 +135,8 @@ Nossa base de desenvolvimento para criação de novas features.
 
 **feature/readmeRevisao** - revisão e correções.
 
+**feature/arquivosDocker** - criação dos arquivos Dockerfile e docker-compose.yml
+
   
 ## 🧑🏻‍🏫 Professores para auxilio
 
