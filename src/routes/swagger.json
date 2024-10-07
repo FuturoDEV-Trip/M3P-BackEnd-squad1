@@ -65,17 +65,17 @@
         }
       }
     },
-    "/usuario/": {
+    "/usuarios/": {
       "post": {
         "tags": [
           "Usuario"
         ],
-        "description": "Cadastra novo usuário, validação de duplicidade de email e cpf, busca endereço a partir do CEP informado",
+        "description": "Cadastra novo usuário, validação de duplicidade de email e cpf, busca endereço a partir do CEP informado.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "description": "Cadastra novo usuário",
+            "description": "Cadastra novo usuário.",
             "schema": {
               "type": "object",
               "properties": {
@@ -132,13 +132,16 @@
           "400": {
             "description": "Bad Request"
           },
+          "409": {
+            "description": "Conflict"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
     },
-    "/usuario/{id}": {
+    "/usuarios/{id}": {
       "get": {
         "tags": [
           "Usuario"
@@ -176,7 +179,7 @@
         "tags": [
           "Usuario"
         ],
-        "description": "Atualiza dados do usuário autenticado",
+        "description": "Atualiza dados do usuário autenticado.",
         "parameters": [
           {
             "name": "id",
@@ -207,10 +210,6 @@
                 "data_nascimento": {
                   "type": "string",
                   "example": "1980-03-03"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "gabrielly_catarina_costa@lins.net.br"
                 },
                 "cep": {
                   "type": "string",
@@ -292,10 +291,10 @@
         }
       }
     },
-    "/local/": {
+    "/destinos/": {
       "post": {
         "tags": [
-          "Local"
+          "Destino"
         ],
         "description": "Cadastra novo local, buscando a cidade e o estado pelas coordenadas informadas, pelo usuário autenticado",
         "parameters": [
@@ -349,7 +348,7 @@
       },
       "get": {
         "tags": [
-          "Local"
+          "Destino"
         ],
         "description": "Lista todos os locais cadastrados pelo usuário autenticado",
         "parameters": [
@@ -372,10 +371,10 @@
         }
       }
     },
-    "/local/{id}": {
+    "/destinos/{id}": {
       "get": {
         "tags": [
-          "Local"
+          "Destino"
         ],
         "description": "Lista local específico cadastrado pelo usuário autenticado",
         "parameters": [
@@ -408,7 +407,7 @@
       },
       "put": {
         "tags": [
-          "Local"
+          "Destino"
         ],
         "description": "Atualiza dados do local cadastrado pelo usuário autenticado",
         "parameters": [
@@ -479,7 +478,7 @@
       },
       "delete": {
         "tags": [
-          "Local"
+          "Destino"
         ],
         "description": "Exclui local cadastrado pelo usuário autenticado",
         "parameters": [
@@ -504,6 +503,92 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/home/": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "description": "Retorna o número de usuários que estão ativos (status = true).",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/home/{id}": {
+      "put": {
+        "tags": [
+          "Home"
+        ],
+        "description": "Desativa o status de um usuário ao realizar o logout.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/home/listarDestinos": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "description": "Retorna uma lista de todos os destinos disponíveis.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/home/totalDestinos": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "description": "Retorna a contagem total de destinos no sistema.",
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "500": {
             "description": "Internal Server Error"

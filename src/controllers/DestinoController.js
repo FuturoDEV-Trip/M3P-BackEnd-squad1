@@ -74,7 +74,21 @@ class DestinoController {
     }
   }
 
-  async listar(req, res) {
+  async listarTodos(req, res) {
+    /*
+        #swagger.path = '/',
+        #swagger.method = 'get',
+        #swagger.tags = ['Destino'],
+        #swagger.description = 'Lista todos os locais cadastrados na plataforma.'
+    */
+    try {
+      const destinos = await Destino.findAll();
+      res.status(200).json(destinos);
+    } catch (error) {
+      res.status(500).json({ erro: "Não foi possível listar todos os destinos." });
+    }
+  }
+  async listarDestinosUsuario(req, res) {
     /*
         #swagger.path = '/',
         #swagger.method = 'get',
@@ -82,7 +96,7 @@ class DestinoController {
         #swagger.description = 'Lista todos os locais cadastrados pelo usuário autenticado'
     */
     try {
-      const userId = req.userId;
+      const userId = req.params.id;
       const destinos = await Destino.findAll({
         where: {
           usuario_id: userId,
