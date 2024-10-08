@@ -90,14 +90,14 @@ class DestinoController {
   }
   async listarDestinosUsuario(req, res) {
     /*
-        #swagger.path = '/',
+        #swagger.path = '/destinos_usuario/:id',
         #swagger.method = 'get',
         #swagger.tags = ['Destino'],
         #swagger.description = 'Lista todos os locais cadastrados pelo usuário autenticado'
     */
     try {
       const userId = req.params.id;
-      const destinos = await Destino.findAll({
+      const destinos = await Destino.findAndCountAll({
         where: {
           usuario_id: userId,
         },
