@@ -1,7 +1,8 @@
 const Usuario = require('../models/Usuario')
 const { consultaCep } = require('../utils/consultaCep')
 const bcrypt = require("bcrypt");
-const Destino = require('../models/Destino')
+const Destino = require('../models/Destino');
+const { debug } = require('console');
 
 class UsuarioController {
     async cadastrar(req, res) {
@@ -27,13 +28,7 @@ class UsuarioController {
         */
         try {
             const { nome, sexo, cpf, cep, numero,
-                email, data_nascimento, password, status } = req.body            
-
-            const { endereco, bairro, cidade, estado } = await consultaCep(cep)  
-            req.body.endereco = endereco  
-            req.body.bairro = bairro
-            req.body.cidade = cidade
-            req.body.estado = estado          
+                email, data_nascimento, password, endereco, bairro, cidade, estado } = req.body                     
 
             if (!(nome || sexo || cpf || cep || numero
                 || email || data_nascimento || password)) {
@@ -59,7 +54,7 @@ class UsuarioController {
             }           
 
             const hash = await bcrypt.hash(password, 8)
-
+            
             const usuario = await Usuario.create({
               nome,
               sexo,
@@ -81,7 +76,7 @@ class UsuarioController {
             res.status(201).json(usuario)
 
         } catch (error) {          
-            res.status(500).json({ erro: 'Não foi possível efetuar o cadastro do usuário, verifique os dados inseridos.' })
+            res.status(500).json({ erro: error })
         }        
     }
 

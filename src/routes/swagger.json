@@ -350,8 +350,30 @@
         "tags": [
           "Destino"
         ],
+        "description": "Lista todos os locais cadastrados na plataforma.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/destinos/destinos_usuario/{id}": {
+      "get": {
+        "tags": [
+          "Destino"
+        ],
         "description": "Lista todos os locais cadastrados pelo usuário autenticado",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "authorization",
             "in": "header",
