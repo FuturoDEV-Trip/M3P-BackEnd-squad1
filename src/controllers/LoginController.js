@@ -46,7 +46,7 @@ class LoginController {
             usuario.status = true;
             await usuario.save()
 
-            return res.json({ user: { id: usuario.id, nome: usuario.nome, email: usuario.email }, token: token });
+            return res.json({ usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email }, token: token });
 
         } catch (error) {   
             console.log(error.message)         
