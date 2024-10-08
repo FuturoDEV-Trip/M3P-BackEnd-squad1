@@ -76,13 +76,13 @@ class DestinoController {
 
   async listarTodos(req, res) {
     /*
-        #swagger.path = '/',
+        #swagger.path = '/totalDestinos',
         #swagger.method = 'get',
         #swagger.tags = ['Destino'],
         #swagger.description = 'Lista todos os locais cadastrados na plataforma.'
     */
     try {
-      const destinos = await Destino.findAll();
+      const destinos = await Destino.findAndCountAll();
       res.status(200).json(destinos);
     } catch (error) {
       res.status(500).json({ erro: "Não foi possível listar todos os destinos." });

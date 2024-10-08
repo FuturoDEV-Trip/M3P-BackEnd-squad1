@@ -4,7 +4,7 @@ const destinoRoutes = new Router()
 const { auth } = require('../middleware/auth')
 
 destinoRoutes.post('/', auth, DestinoController.cadastrar)
-destinoRoutes.get('/', DestinoController.listarTodos)
+destinoRoutes.get('/totalDestinos', DestinoController.listarTodos)
 destinoRoutes.get('/destinos_usuario/:id', auth, DestinoController.listarDestinosUsuario)
 destinoRoutes.get('/:id', auth, DestinoController.listarUm)
 destinoRoutes.put('/:id', auth, DestinoController.atualizar)
