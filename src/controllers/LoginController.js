@@ -39,14 +39,22 @@ class LoginController {
             if(!hashSenha) {
                 return res.status(400).json({ mensagem: 'Senha inválida.' })
             }
-            
-            const payload = { sub: usuario.id, email: usuario.email, nome: usuario.nome }
-            const token = sign(payload, process.env.SECRET_JWT, { expiresIn: '60m' })
-            
+
             usuario.status = true;
             await usuario.save()
 
-            return res.json({ usuario: { id: usuario.id, nome: usuario.nome, email: usuario.email }, token: token });
+            const payload = { sub: usuario.id, email: usuario.email, nome: usuario.nome }
+            const token = sign(payload, process.env.SECRET_JWT, { expiresIn: '60m' })
+
+            res.status(200).json({ Token: token })
+            // return res.json({
+            //     usuario: {
+            //       id: usuario.id,
+            //       nome: usuario.nome,
+            //       email: usuario.email
+            //     },
+            //     token: token
+            //   });
 
         } catch (error) {   
             console.log(error.message)         
