@@ -4,7 +4,7 @@ const Usuario = require("../models/Usuario");
 class HomeController {
   async usuariosAtivos(req, res) {
     /*
-        #swagger.path = '/',
+        #swagger.path = '/totalUsuariosAtivos',
         #swagger.method = 'get',
         #swagger.tags = ['Home'],
         #swagger.description= 'Retorna o número de usuários que estão ativos (status = true).'
@@ -50,6 +50,21 @@ class HomeController {
     }
   }
 
+  async totalUsuarios(req, res) {
+     /*
+        #swagger.path = '/totalUsuarios',
+        #swagger.method = 'get',
+        #swagger.tags = ['Home'],
+        #swagger.description= 'Retorna a contagem total de usuários no sistema.'
+    */
+    try {
+      const usuarios = await Usuario.findAndCountAll();
+
+      res.status(200).json(usuarios);
+    } catch (error) {
+      res.status(500).json({ erro: "Erro ao contar todos os usuários." });
+    }
+  }
   async totalDestinos(req, res) {
      /*
         #swagger.path = '/listarDestinos',

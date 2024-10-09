@@ -52,7 +52,7 @@ Para ter valores inciais no banco de dados será necessário rodar o comando aba
 
 ### Para rodar o repositório em ambiente local:
 
-`node src/index.js`
+`nodemon src/index.js`
   
 ## 🤖 Como rodar o Swagger:
 
@@ -77,9 +77,10 @@ Caso tenha alguma dúvida!!
 - Token JWT - criado na rota login (email e senha do usuário) utilizado para autenticação das rotas privadas. Obs: Token com tempo de expiração de 15 minutos.
   
 - Tabela usuário:
-  Impor o preenchimento nome, sexo, CPF, data de nascimento, e-mail, senha, CEP, endereço, numero, Bairro, cidade e estado - todos obrigatórios.
+  Impor o preenchimento nome, sexo, CPF, data de nascimento, e-mail, senha, CEP, endereço, número, bairro, cidade e estado - todos obrigatórios.
   Cada usuário deve possuir um identificador único, incrementado automaticamente.
-  CPF e email são único - não podem repetir nas colunas respectivas - cpf-check
+  CPF e email são único - não podem repetir nas colunas respectivas 
+  
   Não pode listar dados sensíveis como CPF e senha de login.
   Não pode editar o CPF.
   Não pode deletar usuários com locais de visitação em viagens associadas.
@@ -135,6 +136,8 @@ Nossa base de desenvolvimento para criação de novas features.
 
 **feature/readmeRevisao** - revisão e correções.
 
+**feature/integracao** - Integração do frontend com backend
+
   
 ## 🧑🏻‍🏫 Professores para auxilio
 
@@ -147,6 +150,7 @@ Nossa base de desenvolvimento para criação de novas features.
 - Validação com YUP: Integrar a biblioteca YUP para melhorar a validação dos dados, garantindo que todas as informações sejam submetidas de forma correta e segura.
 - URL amigável e dinâmica: Implementar a geração automática de URLs personalizadas com base nos destinos cadastrados, facilitando o - compartilhamento e o SEO da plataforma.
 - Upload de fotos dos destinos: Adicionar a opção para os usuários fazerem upload de fotos dos destinos que cadastrarem, enriquecendo as informações e a experiência visual da plataforma.
+- trocar os nomes no CRUD para específico de cada: usuários/destinos.
 
 ## 🎁 Expressões de gratidão
 

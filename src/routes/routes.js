@@ -10,8 +10,8 @@ const swaggerDocument = require('./swagger.json')
 
 routes.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 routes.use('/login', loginRoutes)
-routes.use('/usuario', usuarioRoutes)
-routes.use('/local', destinoRoutes)
+routes.use('/usuarios', usuarioRoutes)
+routes.use('/destinos', destinoRoutes)
 routes.use('/home', homeRoutes)
 
 module.exports = routes
