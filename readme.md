@@ -119,7 +119,7 @@ Nossa base de desenvolvimento para criação de novas features.
 
 **feature/EndPointsLogin** - implementação do login e geração do token com validade.
 
-**feature/consultaCepCoordenadas** - integração com a API viaCEP para consulta de endereços e coordenadas pelos usuários.
+**feature/consultaCepCoordenadas** - integração com a API viaCEP para consulta de endereços pelos usuários - com as coordenadas se obtém os dados da localidade.
 
 **feature/padronizaStatusCode** - padronização dos status codes nas respostas da API.
 
