@@ -10,13 +10,19 @@ class HomeController {
         #swagger.description= 'Retorna o número de usuários que estão ativos (status = true).'
     */
     try {
-      const usuariosAtivos = await Usuario.findAndCountAll({
+      
+      const { count, rows } = await Usuario.findAndCountAll({
         where: { status: true },
-      });
-
-      return res.status(200).json({ usuariosAtivos });
+        attributes: ['id', 'nome', 'email']
+      })
+    
+      if (!count) {
+        return res.status(404).json({ erro: "Nenhum usuário ativo na plataforma.", usuariosAtivos: count })
+      }
+    
+      return res.status(200).json({ totalUsuariosAtivos: count, usuarios: rows})
     } catch (error) {
-      return res.status(500).json({ error: "Erro ao contar usuários ativos." });
+      return res.status(500).json({ error: "Erro ao contar usuários ativos.", error })
     }
   }
 
@@ -29,24 +35,22 @@ class HomeController {
     */
     try {
       const { id } = req.params;
-      const usuario = await Usuario.findByPk(id);
+      const usuario = await Usuario.findByPk(id)
 
       if (!usuario) {
-        return res
-          .status(404)
-          .json({ erro: "Nenhum usuário cadastrado com o id informado." });
+        return res.status(404).json({ erro: "Nenhum usuário cadastrado com o id informado." })
       }
 
       if (!(usuario.id === req.userId)) {
-        return res.status(401).json({ erro: "Acesso não autorizado." });
+        return res.status(401).json({ erro: "Acesso não autorizado." })
       }
 
-      usuario.status = false;
-      await usuario.save();
+      usuario.status = false
+      await usuario.save()
 
-      res.status(200).json({ message: "Logout realizado com sucesso." });
+      res.status(200).json({ message: "Logout realizado com sucesso." })
     } catch (error) {
-      res.status(500).json({ error: "Erro ao realizar o logout." });
+      res.status(500).json({ error: "Erro ao realizar o logout." })
     }
   }
 
