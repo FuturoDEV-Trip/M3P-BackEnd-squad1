@@ -176,7 +176,11 @@ class UsuarioController {
                 return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }
 
-            const { cep } = req.body
+            const { cep, cpf} = req.body
+
+            if (cpf !== usuario.cpf) {
+                return res.status(400).json({ erro: 'O CPF não pode ser alterado.' });
+            }
 
             if (cep.length !== 8 || isNaN(cep)) {
                 return res.status(400).json({ erro: 'CEP inválido. Deve 8 digítos e ser apenas números.' })
