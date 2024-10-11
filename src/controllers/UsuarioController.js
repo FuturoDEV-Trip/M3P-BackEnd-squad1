@@ -1,8 +1,7 @@
 const Usuario = require('../models/Usuario')
 const { consultaCep } = require('../utils/consultaCep')
-const bcrypt = require("bcrypt");
-const Destino = require('../models/Destino');
-const { debug } = require('console');
+const bcrypt = require("bcrypt")
+const Destino = require('../models/Destino')
 
 class UsuarioController {
     async cadastrar(req, res) {
@@ -47,13 +46,20 @@ class UsuarioController {
             })
 
             if (cpfExistente) {
-                return res.status(409).json({ mensagem: 'CPF já cadastrado.' })
+                return res.status(409).json({ mensagem: 'CPF já cadastrado, tente novamente.' })
             }
+
+            if (cep.length !== 8 || isNaN(cep)) {
+                return res.status(400).json({ erro: 'CEP inválido. Deve 8 digítos e ser apenas números.' })
+            }
+
             if (emailExistente) {
-                return res.status(409).json({ mensagem: 'E-mail já cadastrado.' })
+                return res.status(409).json({ mensagem: 'E-mail já cadastrado, tente novamente.' })
             }           
 
             const hash = await bcrypt.hash(password, 8)
+
+            const dadosCep = await consultaCep (cep)
             
             const usuario = await Usuario.create({
               nome,
@@ -63,20 +69,25 @@ class UsuarioController {
               email,
               password: hash,
               cep,
-              endereco,
+              endereco: dadosCep.endereco,
               numero,
-              bairro,
-              cidade,
-              estado,
+              bairro: dadosCep.bairro,
+              cidade: dadosCep.cidade,
+              estado: dadosCep.estado,
               status: false
-            });
+            })
+
             await usuario.validate()
             await usuario.save()
 
             res.status(201).json(usuario)
 
-        } catch (error) {          
-            res.status(500).json({ erro: error })
+        } catch (error) {
+            if (error.message.includes('CEP não encontrado')) {
+                return res.status(400).json({ erro: 'CEP inválido.' })
+            } else {
+                return res.status(500).json({ erro: 'Não foi possível cadastrar usuário, preencha todos os campos corretamente.' });
+            }
         }        
     }
 
@@ -95,8 +106,7 @@ class UsuarioController {
                     'nome', 
                     'sexo', 
                     'data_nascimento', 
-                    'email', 
-                    'password',                   
+                    'email',                  
                     'cep', 
                     'endereco', 
                     'numero', 
@@ -166,11 +176,30 @@ class UsuarioController {
                 return res.status(401).json({ erro: 'Acesso não autorizado.' })
             }
 
+            const { cep } = req.body
+
+            if (cep.length !== 8 || isNaN(cep)) {
+                return res.status(400).json({ erro: 'CEP inválido. Deve 8 digítos e ser apenas números.' })
+            }
+
+            if (req.body.cep !== usuario.cep) {
+                const dadosCep = await consultaCep(req.body.cep)
+
+            if (!dadosCep || dadosCep.erro) {
+                return res.status(400).json({ erro: 'CEP inválido ou não encontrado.' })
+            }
+
+                req.body.endereco = dadosCep.endereco;
+                req.body.bairro = dadosCep.bairro;
+                req.body.cidade = dadosCep.cidade;
+                req.body.estado = dadosCep.estado;
+            }
+
             await usuario.update(req.body)
-            res.status(200).json({ mensagem: 'Alteração efetuada com sucesso.' })
+            res.status(200).json({ mensagem: 'Alteração efetuada com sucesso.', usuario: usuario })
 
         } catch (error) {
-            res.status(500).json({ erro: 'Não foi possível atualizar usuário.' })
+            res.status(500).json({ erro: 'Não foi possível atualizar usuário, preencha os campos corretamente.' })
         }
     }
 
@@ -200,7 +229,7 @@ class UsuarioController {
             })
 
             if (destinoUsuario.length > 0) {
-                return res.status(400).json({erro: 'Este usuário não pode ser excluído pois possui locais cadastrados.'})
+                return res.status(400).json({erro: 'Este usuário não pode ser excluído pois possui Destinos cadastrados.'})
             }
 
             await usuario.destroy()
