@@ -1,5 +1,4 @@
-const { verify } = require('jsonwebtoken');
-const Usuario = require('../models/Usuario');
+const { verify } = require('jsonwebtoken')
 
 async function auth(req, res, next) {
     try {
