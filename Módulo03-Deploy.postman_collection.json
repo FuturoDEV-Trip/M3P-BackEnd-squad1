@@ -1,0 +1,382 @@
+{
+	"info": {
+		"_postman_id": "de186f3f-bf92-45d9-87ab-ff90bd8a609d",
+		"name": "Módulo03-Deploy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33911800"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"abc@abc.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/login",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Usuário",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"abc\",\r\n  \"sexo\": \"Feminino\",\r\n  \"cpf\": \"06380222073\",\r\n  \"cep\": \"91160040\",\r\n  \"numero\": \"700\",\r\n  \"email\": \"abc@abc.com\",\r\n  \"data_nascimento\": \"1989-03-03\",\r\n  \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/usuarios",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Usuário",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsIm5vbWUiOiJhYmMiLCJpYXQiOjE3Mjg3NjUzMjIsImV4cCI6MTcyODc2ODkyMn0.nGsnYQd36UWDvWdp0QrutGSLYVGaDgcHULk7wh2S_co"
+					}
+				],
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/usuarios/6",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"usuarios",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar Usuário",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsIm5vbWUiOiJhYmMiLCJpYXQiOjE3Mjg3NjUzMjIsImV4cCI6MTcyODc2ODkyMn0.nGsnYQd36UWDvWdp0QrutGSLYVGaDgcHULk7wh2S_co"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"ab\",\r\n    \"sexo\": \"Masculino\",\r\n    \"data_nascimento\": \"1980-03-03T00:00:00.000Z\",\r\n    \"email\": \"abc@abc.com\",\r\n    \"cep\": \"88060305\",\r\n    \"numero\": \"700\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/usuarios/6",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"usuarios",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir Usuário",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5vbWUiOiJhYmMiLCJpYXQiOjE3Mjg3NDI4NDUsImV4cCI6MTcyODc0NjQ0NX0.G-Q_VUkQLunJR8usmNHZhZHeKEHDOO-eE3WnOCp11Mg"
+					}
+				],
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/usuarios/8",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"usuarios",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Destino",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsIm5vbWUiOiJhYiIsImlhdCI6MTcyODc3MjEyMywiZXhwIjoxNzI4Nzc1NzIzfQ.aELYDmDqZ6CIk8H7pTjWMhqD54cFG2-630MOUMhyEY4"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Praia da Armação\",\r\n  \"descricao\": \"Praia extensa com restaurantes de frutos do mar e ideal para passear de barco, nadar e fazer caminhadas pela encosta.\",\r\n  \"coordenadas_geo\": \"-27.7442822,-48.5182281\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/destinos",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"destinos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Destinos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsIm5vbWUiOiJhYmMiLCJpYXQiOjE3Mjg3NjUzMjIsImV4cCI6MTcyODc2ODkyMn0.nGsnYQd36UWDvWdp0QrutGSLYVGaDgcHULk7wh2S_co"
+					}
+				],
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/destinos/listarDestinosUsuario",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"destinos",
+						"listarDestinosUsuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Destino",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsIm5vbWUiOiJhYmMiLCJpYXQiOjE3Mjg3NjUzMjIsImV4cCI6MTcyODc2ODkyMn0.nGsnYQd36UWDvWdp0QrutGSLYVGaDgcHULk7wh2S_co"
+					}
+				],
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/destinos/1",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"destinos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar Destino",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsIm5vbWUiOiJhYmMiLCJpYXQiOjE3Mjg3NjUzMjIsImV4cCI6MTcyODc2ODkyMn0.nGsnYQd36UWDvWdp0QrutGSLYVGaDgcHULk7wh2S_co"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Praia da Armação abc\",\r\n  \"descricao\": \"Praia extensa com restaurantes de frutos do mar e ideal para passear de barco, nadar e fazer caminhadas pela encosta.\",\r\n  \"coordenadas_geo\": \"-27.7442822,-48.5182281\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/destinos/1",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"destinos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir Destino",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsIm5vbWUiOiJhYmMiLCJpYXQiOjE3Mjg3NjUzMjIsImV4cCI6MTcyODc2ODkyMn0.nGsnYQd36UWDvWdp0QrutGSLYVGaDgcHULk7wh2S_co"
+					}
+				],
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/destinos/1",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"destinos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Usuários Ativos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiSm_Do28iLCJpYXQiOjE3MTU5MjE2NTN9.tMNnvpOWcfuaIQYeW_QwVOi6-mGuSPYvyV5rGHDnXtw",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/home/usuariosAtivos",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"home",
+						"usuariosAtivos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout Usuários Ativo",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsIm5vbWUiOiJhYmMiLCJpYXQiOjE3Mjg2MTE0NjksImV4cCI6MTcyODYxNTA2OX0.m6k_hfQWPTlpOu8ACucLB5Oti-9w8nbAnUk0JWeE-70"
+					}
+				],
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/home/6",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"home",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total Destinos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiSm_Do28iLCJpYXQiOjE3MTU5MjE2NTN9.tMNnvpOWcfuaIQYeW_QwVOi6-mGuSPYvyV5rGHDnXtw",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://m3p-backend-squad1.onrender.com/home/totalDestinos",
+					"protocol": "https",
+					"host": [
+						"m3p-backend-squad1",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"home",
+						"totalDestinos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

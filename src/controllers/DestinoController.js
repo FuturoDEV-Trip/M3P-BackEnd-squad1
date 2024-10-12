@@ -1,4 +1,5 @@
 const Destino = require("../models/Destino");
+const Usuario = require("../models/Usuario");
 const { consultaCidade } = require("../utils/consultaCidade");
 
 class DestinoController {
@@ -20,17 +21,13 @@ class DestinoController {
     */
 
     try {
-      const usuario_id = req.userId;
-      req.body.usuario_id = usuario_id;
+      const usuario_id = req.userId
+      req.body.usuario_id = usuario_id
 
-      const nome = req.body.nome;
-      const descricao = req.body.descricao;
-      const coordenadas_geo = req.body.coordenadas_geo;
+      const { nome, descricao, coordenadas_geo } = req.body
 
-      if (!(nome || descricao || coordenadas_geo)) {
-        return res
-          .status(400)
-          .json({ erro: "Todos os campos devem ser preenchidos." });
+      if (!nome || !descricao || !coordenadas_geo) {
+        return res.status(400).json({ erro: 'Todos os campos são obrigatórios.' })
       }
 
       const coordenadasExistente = await Destino.findOne({
@@ -38,17 +35,18 @@ class DestinoController {
           usuario_id: usuario_id,
           coordenadas_geo: coordenadas_geo,
         },
-      });
+      })
+
       if (coordenadasExistente) {
         return res.status(400).json({
           mensagem: "Coordenadas já foram cadastradas para este usuário.",
-        });
+        })
       }
 
       if (coordenadas_geo) {
         const { cep, cidade, estado, pais } = await consultaCidade(
           coordenadas_geo
-        );
+        )
 
         if (cep && cidade && estado && pais) {
           req.body.cep = cep;
@@ -62,49 +60,37 @@ class DestinoController {
         }
       }
 
-      const destino = await Destino.create(req.body);
-      await destino.save();
+      const destino = await Destino.create(req.body)
 
-      res.status(201).json(destino);
+      await destino.save()
+
+      res.status(201).json(destino)
     } catch (error) {
-      console.error("Erro ao cadastrar destino:", error);
-      res
-        .status(500)
-        .json({ erro: "Não foi possível efetuar o cadastro do destino." });
+      res.status(500).json({ erro: "Não foi possível efetuar o cadastro do destino." })
     }
   }
-
-  async listarTodos(req, res) {
-    /*
-        #swagger.path = '/totalDestinos',
-        #swagger.method = 'get',
-        #swagger.tags = ['Destino'],
-        #swagger.description = 'Lista todos os locais cadastrados na plataforma.'
-    */
-    try {
-      const destinos = await Destino.findAndCountAll();
-      res.status(200).json(destinos);
-    } catch (error) {
-      res.status(500).json({ erro: "Não foi possível listar todos os destinos." });
-    }
-  }
+  
   async listarDestinosUsuario(req, res) {
     /*
-        #swagger.path = '/destinos_usuario/:id',
+        #swagger.path = '/listarDestinosUsuario',
         #swagger.method = 'get',
         #swagger.tags = ['Destino'],
         #swagger.description = 'Lista todos os locais cadastrados pelo usuário autenticado'
     */
     try {
-      const userId = req.params.id;
-      const destinos = await Destino.findAndCountAll({
+      const usuario_id = req.userId
+      req.body.usuario_id = usuario_id
+
+      const { count, rows} = await Destino.findAndCountAll({
         where: {
-          usuario_id: userId,
+          usuario_id: usuario_id,
         },
-      });
-      res.status(200).json(destinos);
+      })
+
+      
+      res.status(200).json({ totalDestinos: count, destinos: rows})
     } catch (error) {
-      res.status(500).json({ erro: "Não foi possível listar os destinos." });
+      res.status(500).json({ erro: "Não foi possível listar os destinos." })
     }
   }
 
@@ -116,23 +102,21 @@ class DestinoController {
         #swagger.description = 'Lista local específico cadastrado pelo usuário autenticado'
     */
     try {
-      const { id } = req.params;
-      const destino = await Destino.findByPk(id);
+      const { id } = req.params
+      const destino = await Destino.findByPk(id)
 
       if (!destino) {
-        return res
-          .status(404)
-          .json({ erro: "Nenhum destino cadastrado com o id informado." });
+        return res.status(404).json({ erro: "Nenhum destino cadastrado com o id informado." })
       }
 
       if (!(destino.usuario_id === req.userId)) {
-        return res.status(401).json({ erro: "Acesso não autorizado." });
+        return res.status(401).json({ erro: "Acesso não autorizado." })
       }
 
-      res.status(200).json(destino);
+      res.status(200).json(destino)
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ erro: "Não foi possível listar o destino." });
+      res.status(500).json({ erro: "Não foi possível listar o destino." })
     }
   }
 
@@ -158,23 +142,24 @@ class DestinoController {
     */
     try {
       const { id } = req.params;
-      const destino = await Destino.findByPk(id);
+      const destino = await Destino.findByPk(id)
 
       if (!destino) {
         return res
           .status(404)
-          .json({ erro: "Nenhum destino cadastrado com o id informado." });
+          .json({ erro: "Nenhum destino cadastrado com o id informado." })
       }
 
       if (!(destino.usuario_id === req.userId)) {
-        return res.status(401).json({ erro: "Acesso não autorizado." });
+        return res.status(401).json({ erro: "Acesso não autorizado." })
       }
 
-      await destino.update(req.body);
-      await destino.save();
-      res.status(200).json({ mensagem: "Alterações efetuadas com sucesso." });
+      await destino.update(req.body)
+      await destino.save()
+
+      res.status(200).json({ mensagem: "Alterações efetuadas com sucesso." })
     } catch (error) {
-      res.status(500).json({ erro: "Não foi possível atualizar o destino." });
+      res.status(500).json({ erro: "Não foi possível atualizar o destino." })
     }
   }
 
@@ -187,24 +172,24 @@ class DestinoController {
         */
     try {
       const { id } = req.params;
-      const destino = await Destino.findByPk(id);
+      const destino = await Destino.findByPk(id)
 
       if (!destino) {
         return res
           .status(404)
-          .json({ erro: "Nenhum destino cadastrado com o id informado." });
+          .json({ erro: "Nenhum destino cadastrado com o id informado." })
       }
 
       if (!(destino.usuario_id === req.userId)) {
-        return res.status(401).json({ erro: "Acesso não autorizado." });
+        return res.status(401).json({ erro: "Acesso não autorizado." })
       }
 
       await destino.destroy();
-      res.status(200).json({ mensagem: "Local excluído com sucesso." });
+      res.status(200).json({ mensagem: "Local excluído com sucesso." })
     } catch (error) {
-      res.status(500).json({ error: "Não foi possível excluir o destino." });
+      res.status(500).json({ error: "Não foi possível excluir o destino, tente novamente mais tarde." })
     }
   }
 }
 
-module.exports = new DestinoController();
+module.exports = new DestinoController()
