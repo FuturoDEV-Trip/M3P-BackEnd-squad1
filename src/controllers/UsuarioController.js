@@ -39,6 +39,7 @@ class UsuarioController {
                     cpf: cpf                    
                 }
             })
+            
             const emailExistente = await Usuario.findOne({
                 where: {
                     email: email                    
@@ -49,13 +50,13 @@ class UsuarioController {
                 return res.status(409).json({ mensagem: 'CPF já cadastrado, tente novamente.' })
             }
 
-            if (cep.length !== 8 || isNaN(cep)) {
-                return res.status(400).json({ erro: 'CEP inválido. Deve 8 digítos e ser apenas números.' })
-            }
-
             if (emailExistente) {
                 return res.status(409).json({ mensagem: 'E-mail já cadastrado, tente novamente.' })
             }           
+            
+            if (cep.length !== 8 || isNaN(cep)) {
+                return res.status(400).json({ erro: 'CEP inválido. Deve 8 digítos e ser apenas números.' })
+            }
 
             const hash = await bcrypt.hash(password, 8)
 
@@ -126,7 +127,7 @@ class UsuarioController {
             res.status(200).json(usuario)
 
         } catch (error) {
-            res.status(500).json({ erro: 'Não foi possível encontrar usuário.' })
+            res.status(500).json({ erro: 'Não foi possível encontrar usuário, tente novamente mais tarde.' })
         }
     }
 
@@ -144,11 +145,7 @@ class UsuarioController {
                     sexo: 'Feminino',                    
                     data_nascimento: '1980-03-03',                  
                     cep: '69307540',
-                    endereco: 'Rua da Tamarineira',
-                    numero: '786',
-                    bairro: 'Caçari',
-                    cidade: 'Boa Vista',
-                    estado: 'Roraima'                   
+                    numero: '786'              
                 }
             }
         */
@@ -200,7 +197,7 @@ class UsuarioController {
             }
 
             await usuario.update(req.body)
-            res.status(200).json({ mensagem: 'Alteração efetuada com sucesso.', usuario: usuario })
+            res.status(200).json({ mensagem: 'Alteração realizada com sucesso.', usuario: usuario })
 
         } catch (error) {
             res.status(500).json({ erro: 'Não foi possível atualizar usuário, preencha os campos corretamente.' })
@@ -240,7 +237,7 @@ class UsuarioController {
             res.status(200).json({ mensagem: 'Usuário excluído com sucesso.' })
 
         } catch (error) {
-            res.status(500).json({ erro: 'Não foi possível excluir usuário.' })
+            res.status(500).json({ erro: 'Não foi possível excluir usuário, tente novamente mais tarde.' })
         }
     }
 }
