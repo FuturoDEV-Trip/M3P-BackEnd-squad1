@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize')
 const { connection } = require('../database/connection')
-const cpfCheck = require('cpf-check')
 
 const Usuario = connection.define('usuarios', {
     nome: {
@@ -14,14 +13,7 @@ const Usuario = connection.define('usuarios', {
     cpf: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
-        validate: {
-            validaCpf(cpf) {
-                if (!cpfCheck.validate(cpf)) {
-                    throw new Error('CPF inválido')
-                }
-            }
-        }
+        unique: true
     },
     data_nascimento: {
         type: DataTypes.DATEONLY,
