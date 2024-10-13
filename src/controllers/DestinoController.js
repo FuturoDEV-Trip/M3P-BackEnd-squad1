@@ -1,6 +1,5 @@
 const Destino = require("../models/Destino");
 const Usuario = require("../models/Usuario");
-const { consultaCidade } = require("../utils/consultaCidade");
 
 class DestinoController {
   async cadastrar(req, res) {
