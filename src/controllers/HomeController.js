@@ -37,10 +37,6 @@ class HomeController {
         return res.status(404).json({ erro: 'Nenhum usuário cadastrado na plataforma com o id informado.' })
       }
 
-      if (!(usuario.id === req.userId)) {
-        return res.status(401).json({ erro: 'Acesso não autorizado, não corresponde ao usuário informado.' })
-      }
-
       usuario.status = false
       await usuario.save()
 
