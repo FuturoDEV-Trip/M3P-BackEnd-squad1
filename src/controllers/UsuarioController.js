@@ -215,10 +215,6 @@ class UsuarioController {
           .json({ erro: "Nenhum usuário cadastrado com o id informado." });
       }
 
-      if (!(usuario.id === req.userId)) {
-        return res.status(401).json({ erro: "Acesso não autorizado." });
-      }
-
       const destinoUsuario = await Destino.findAll({
         where: {
           usuario_id: id,

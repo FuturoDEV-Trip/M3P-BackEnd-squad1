@@ -119,10 +119,6 @@ class DestinoController {
           .json({ erro: "Nenhum destino cadastrado com o id informado." });
       }
 
-      if (!(destino.usuario_id === req.userId)) {
-        return res.status(401).json({ erro: "Acesso não autorizado." });
-      }
-
       res.status(200).json(destino);
     } catch (error) {
       console.log(error.message);
@@ -160,10 +156,6 @@ class DestinoController {
           .json({ erro: "Nenhum destino cadastrado com o id informado." });
       }
 
-      if (!(destino.usuario_id === req.userId)) {
-        return res.status(401).json({ erro: "Acesso não autorizado." });
-      }
-
       await destino.update(req.body);
       await destino.save();
 
@@ -188,10 +180,6 @@ class DestinoController {
         return res
           .status(404)
           .json({ erro: "Nenhum destino cadastrado com o id informado." });
-      }
-
-      if (!(destino.usuario_id === req.userId)) {
-        return res.status(401).json({ erro: "Acesso não autorizado." });
       }
 
       await destino.destroy();
