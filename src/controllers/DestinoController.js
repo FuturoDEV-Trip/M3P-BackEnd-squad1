@@ -87,16 +87,19 @@ class DestinoController {
         #swagger.description = 'Lista todos os locais cadastrados pelo usuário autenticado'
     */
     try {
-      const usuario_id = req.userId;
-      req.body.usuario_id = usuario_id;
+      const { id } = req.params;
 
-      const { count, rows } = await Destino.findAndCountAll({
-        where: {
-          usuario_id: usuario_id,
-        },
+      const passeios = await Destino.findAndCountAll({
+        where: { id },
       });
 
-      res.status(200).json({ totalDestinos: count, destinos: rows });
+      if (passeios.count === 0) {
+        return res
+          .status(404)
+          .json({ message: "O usuario ainda não tem passeios cadastrados." });
+      }
+
+      res.status(200).json({ passeios });
     } catch (error) {
       res.status(500).json({ erro: "Não foi possível listar os destinos." });
     }
