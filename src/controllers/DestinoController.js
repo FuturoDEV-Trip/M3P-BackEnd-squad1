@@ -23,7 +23,7 @@ class DestinoController {
     try {
       const usuario_id = req.userId
       req.body.usuario_id = usuario_id
-
+      
       const { nome, descricao, coordenadas_geo } = req.body
 
       if (!nome || !descricao || !coordenadas_geo) {
@@ -38,29 +38,21 @@ class DestinoController {
       })
 
       if (coordenadasExistente) {
-        return res.status(400).json({
-          mensagem: "Coordenadas já foram cadastradas para este usuário.",
-        })
+        return res.status(400).json({ mensagem: "Coordenadas já foram cadastradas para este usuário." })
       }
 
-      if (coordenadas_geo) {
-        const { cep, cidade, estado, pais } = await consultaCidade(
-          coordenadas_geo
-        )
+      const dadosCoordenadas = await consultaCidade (coordenadas_geo)
 
-        if (cep && cidade && estado && pais) {
-          req.body.cep = cep;
-          req.body.cidade = cidade;
-          req.body.estado = estado;
-          req.body.pais = pais;
-        } else {
-          throw new Error(
-            "Não foi possível encontrar a cidade e estado para as coordenadas fornecidas."
-          );
-        }
-      }
-
-      const destino = await Destino.create(req.body)
+      const destino = await Destino.create({
+        usuario_id,
+        nome,
+        descricao,
+        coordenadas_geo,
+        cep: dadosCoordenadas.cep,
+        cidade: dadosCoordenadas.cidade,
+        estado: dadosCoordenadas.estado,
+        pais: dadosCoordenadas.pais
+      })
 
       await destino.save()
 
