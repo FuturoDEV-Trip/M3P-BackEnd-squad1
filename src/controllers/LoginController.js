@@ -40,7 +40,7 @@ class LoginController {
                 return res.status(400).json({ mensagem: 'Senha inválida.' })
             }
 
-            usuario.status = true;
+            usuario.status = true
             await usuario.save()
 
             const payload = { sub: usuario.id, nome: usuario.nome }
