@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "de186f3f-bf92-45d9-87ab-ff90bd8a609d",
+		"name": "Módulo03",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33911800"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"abc@abc.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Usuário",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"abc\",\r\n  \"sexo\": \"Feminino\",\r\n  \"cpf\": \"55386567055\",\r\n  \"cep\": \"91160040\",\r\n  \"numero\": \"700\",\r\n  \"email\": \"abc@abc.com\",\r\n  \"data_nascimento\": \"1980-03-03\",\r\n  \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Usuário",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoidGVzdGVhQHRlc3RlLmNvbSIsIm5vbWUiOiJ0ZXN0ZUEiLCJpYXQiOjE3Mjc5OTY5MDcsImV4cCI6MTcyNzk5NzgwN30.uo0NOkh_74ksGflO-As-VPsLTJ5HG_jsDTjfdnj_hRE"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/usuario/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar Usuário",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoidGVzdGVhQHRlc3RlLmNvbSIsIm5vbWUiOiJ0ZXN0ZUEiLCJpYXQiOjE3Mjc5OTY5MDcsImV4cCI6MTcyNzk5NzgwN30.uo0NOkh_74ksGflO-As-VPsLTJ5HG_jsDTjfdnj_hRE"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Gabrielly Catarina Márcia Costa\",\r\n  \"sexo\": \"Feminino\",\r\n  \"data_nascimento\": \"1980-03-03\",\r\n  \"email\": \"gabrielly_catarina_costa@lins.net.br\",\r\n  \"cep\": \"33230000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuario/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir Usuário",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiYWJjIiwiaWF0IjoxNzI3OTk3MjA4LCJleHAiOjE3Mjc5OTgxMDh9.uis9odltA8a9vGza9_rtg9uDY6nAzMhKYt8DmTJ5ByE"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/usuario/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Destino",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiYWJjIiwiaWF0IjoxNzI3OTk3MjUxLCJleHAiOjE3Mjc5OTgxNTF9.lntOwuEb3zROv_W2Gf43ODjwamV904VjT2_nXbywsWk"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Praia da Armação\",\r\n  \"descricao\": \"Praia extensa com restaurantes de frutos do mar e ideal para passear de barco, nadar e fazer caminhadas pela encosta.\",\r\n  \"coordenadas_geo\": \"-27.7442822,-48.5182281\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/local",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Destinos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiYWJjIiwiaWF0IjoxNzI3OTk3MjUxLCJleHAiOjE3Mjc5OTgxNTF9.lntOwuEb3zROv_W2Gf43ODjwamV904VjT2_nXbywsWk"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/local",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"local"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Destino",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiYWJjIiwiaWF0IjoxNzI3OTk3MjUxLCJleHAiOjE3Mjc5OTgxNTF9.lntOwuEb3zROv_W2Gf43ODjwamV904VjT2_nXbywsWk"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/local/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"local",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar Destino",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiYWJjIiwiaWF0IjoxNzI3OTk3MjUxLCJleHAiOjE3Mjc5OTgxNTF9.lntOwuEb3zROv_W2Gf43ODjwamV904VjT2_nXbywsWk"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Praia da Armação abc\",\r\n  \"descricao\": \"Praia extensa com restaurantes de frutos do mar e ideal para passear de barco, nadar e fazer caminhadas pela encosta.\",\r\n  \"coordenadas_geo\": \"-27.7442822,-48.5182281\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/local/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"local",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir Destino",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiYWJjIiwiaWF0IjoxNzI3OTk3MjUxLCJleHAiOjE3Mjc5OTgxNTF9.lntOwuEb3zROv_W2Gf43ODjwamV904VjT2_nXbywsWk"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/local/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"local",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Usuários Ativos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiSm_Do28iLCJpYXQiOjE3MTU5MjE2NTN9.tMNnvpOWcfuaIQYeW_QwVOi6-mGuSPYvyV5rGHDnXtw"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/home",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"home"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout Usuários Ativo",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiYWJjIiwiaWF0IjoxNzI3OTk3MjUxLCJleHAiOjE3Mjc5OTgxNTF9.lntOwuEb3zROv_W2Gf43ODjwamV904VjT2_nXbywsWk"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/home/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"home",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todos Destinos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiSm_Do28iLCJpYXQiOjE3MTU5MjE2NTN9.tMNnvpOWcfuaIQYeW_QwVOi6-mGuSPYvyV5rGHDnXtw"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/home/listarDestinos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"home",
+						"listarDestinos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total Destinos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImVtYWlsIjoiYWJjQGFiYy5jb20iLCJub21lIjoiSm_Do28iLCJpYXQiOjE3MTU5MjE2NTN9.tMNnvpOWcfuaIQYeW_QwVOi6-mGuSPYvyV5rGHDnXtw",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/home/totalDestinos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"home",
+						"totalDestinos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

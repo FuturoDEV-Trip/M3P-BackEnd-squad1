@@ -1,9 +1,11 @@
 const { DataTypes } = require('sequelize')
 const { connection } = require('../database/connection')
+const Usuario = require('./Usuario')
+
 const Destino = connection.define('destinos', {
     usuario_id: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
             model: 'usuarios',
             key: 'id'
@@ -17,17 +19,27 @@ const Destino = connection.define('destinos', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    coordenadas_geo: {
+        type: DataTypes.STRING
+    },
+    cep: {
+        type: DataTypes.STRING
+    },
     cidade: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    uf: {
+    estado: {
         type:DataTypes.STRING,
         allowNull: false
     },
-    coordenadas_geo: {
-        type: DataTypes.STRING
+    pais: {
+        type:DataTypes.STRING,
+        allowNull: false
     }
 })
+
+Usuario.hasMany(Destino, { foreignKey: 'usuario_id' })
+Destino.belongsTo(Usuario)
 
 module.exports = Destino

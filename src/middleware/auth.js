@@ -5,13 +5,14 @@ async function auth(req, res, next) {
         const { authorization } = req.headers
 
         const payload = verify(authorization, process.env.SECRET_JWT)
+
         req.userId = payload.sub
     
         next()
 
     } catch (error) {
         return res.status(401).json({
-            message: "A autenticação falhou",
+            message: 'A autenticação falhou, tente novamente.',
             cause: error.message
         })
     }

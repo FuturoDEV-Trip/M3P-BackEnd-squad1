@@ -35,11 +35,11 @@
               "properties": {
                 "email": {
                   "type": "string",
-                  "example": "email@email.com"
+                  "example": "catarina_costa@lins.net.br"
                 },
                 "password": {
                   "type": "string",
-                  "example": "1234"
+                  "example": "12345"
                 }
               },
               "required": [
@@ -56,8 +56,8 @@
           "400": {
             "description": "Bad Request"
           },
-          "404": {
-            "description": "Not Found"
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -65,23 +65,23 @@
         }
       }
     },
-    "/usuario/": {
+    "/usuarios/": {
       "post": {
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Cadastra novo usuário, validação de duplicidade de email e cpf, busca endereço a partir do CEP informado.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "description": "Cadastra novo usuário",
+            "description": "Cadastra novo usuário.",
             "schema": {
               "type": "object",
               "properties": {
                 "nome": {
                   "type": "string",
-                  "example": "Karina"
+                  "example": "Catarina Márcia Costa"
                 },
                 "sexo": {
                   "type": "string",
@@ -89,42 +89,38 @@
                 },
                 "cpf": {
                   "type": "string",
-                  "example": "83526448078"
-                },
-                "cep": {
-                  "type": "string",
-                  "example": "88066242"
-                },
-                "numero": {
-                  "type": "string",
-                  "example": "577"
-                },
-                "complemento": {
-                  "type": "string",
-                  "example": "Apto 1"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "email@email.com"
+                  "example": "25942677085"
                 },
                 "data_nascimento": {
                   "type": "string",
-                  "example": "1979-03-22"
+                  "example": "1980-03-03"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "catarina_costa@lins.net.br"
                 },
                 "password": {
                   "type": "string",
-                  "example": "1234"
+                  "example": "12345"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "91160040"
+                },
+                "numero": {
+                  "type": "string",
+                  "example": "700"
                 }
               },
               "required": [
                 "nome",
                 "sexo",
                 "cpf",
-                "cep",
-                "numero",
-                "email",
                 "data_nascimento",
-                "password"
+                "email",
+                "password",
+                "cep",
+                "numero"
               ]
             }
           }
@@ -145,12 +141,12 @@
         }
       }
     },
-    "/usuario/{id}": {
+    "/usuarios/{id}": {
       "get": {
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Lista dados do usuário autenticado",
         "parameters": [
           {
             "name": "id",
@@ -171,8 +167,8 @@
           "401": {
             "description": "Unauthorized"
           },
-          "403": {
-            "description": "Forbidden"
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -183,7 +179,7 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Atualiza dados do usuário autenticado.",
         "parameters": [
           {
             "name": "id",
@@ -205,43 +201,39 @@
               "properties": {
                 "nome": {
                   "type": "string",
-                  "example": "Nome Alterado"
+                  "example": "Gabrielly Catarina Márcia Costa"
                 },
                 "sexo": {
                   "type": "string",
                   "example": "Feminino"
                 },
-                "cpf": {
+                "data_nascimento": {
                   "type": "string",
-                  "example": "83526448078"
+                  "example": "1980-03-03"
                 },
                 "cep": {
                   "type": "string",
-                  "example": "88066242"
+                  "example": "69307540"
                 },
                 "endereco": {
                   "type": "string",
-                  "example": "Servidao Alfredo"
+                  "example": "Rua da Tamarineira"
                 },
                 "numero": {
                   "type": "string",
-                  "example": "577"
+                  "example": "786"
                 },
-                "complemento": {
+                "bairro": {
                   "type": "string",
-                  "example": "Apto 1"
+                  "example": "Caçari"
                 },
-                "email": {
+                "cidade": {
                   "type": "string",
-                  "example": "email@email.com"
+                  "example": "Boa Vista"
                 },
-                "data_nascimento": {
+                "estado": {
                   "type": "string",
-                  "example": "1979-03-22"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "1234"
+                  "example": "Roraima"
                 }
               }
             }
@@ -254,8 +246,8 @@
           "401": {
             "description": "Unauthorized"
           },
-          "403": {
-            "description": "Forbidden"
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -266,7 +258,7 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Exclui usuário autenticado, desde que não tenha locais cadastrados",
         "parameters": [
           {
             "name": "id",
@@ -284,11 +276,14 @@
           "200": {
             "description": "OK"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "401": {
             "description": "Unauthorized"
           },
-          "403": {
-            "description": "Forbidden"
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -296,12 +291,12 @@
         }
       }
     },
-    "/local/": {
+    "/destinos/": {
       "post": {
         "tags": [
-          "Local"
+          "Destino"
         ],
-        "description": "",
+        "description": "Cadastra novo local, buscando a cidade e o estado pelas coordenadas informadas, pelo usuário autenticado",
         "parameters": [
           {
             "name": "authorization",
@@ -311,21 +306,21 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Cadastra novo destino",
+            "description": "Cadastra novo local",
             "schema": {
               "type": "object",
               "properties": {
                 "nome": {
                   "type": "string",
-                  "example": "Lagoa do Peri"
+                  "example": "Praia da Armação"
                 },
                 "descricao": {
                   "type": "string",
-                  "example": "Local muito bom para passar o dia com a família, lagoa própria pra banho e com opção de realizar trilha no local, há um restaurante na entrada da lagoa"
+                  "example": "Praia extensa com restaurantes de frutos do mar e ideal para passear de barco, nadar e fazer caminhadas pela encosta."
                 },
                 "coordenadas_geo": {
                   "type": "string",
-                  "example": "-27.7292638,-48.5559065"
+                  "example": "-27.7442822,-48.5182281"
                 }
               },
               "required": [
@@ -346,9 +341,6 @@
           "401": {
             "description": "Unauthorized"
           },
-          "409": {
-            "description": "Conflict"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -356,22 +348,12 @@
       },
       "get": {
         "tags": [
-          "Local"
+          "Destino"
         ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
+        "description": "Lista todos os locais cadastrados na plataforma.",
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "500": {
             "description": "Internal Server Error"
@@ -379,12 +361,12 @@
         }
       }
     },
-    "/local/{id}": {
+    "/destinos/destinos_usuario/{id}": {
       "get": {
         "tags": [
-          "Local"
+          "Destino"
         ],
-        "description": "",
+        "description": "Lista todos os locais cadastrados pelo usuário autenticado",
         "parameters": [
           {
             "name": "id",
@@ -405,8 +387,40 @@
           "401": {
             "description": "Unauthorized"
           },
-          "403": {
-            "description": "Forbidden"
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/destinos/{id}": {
+      "get": {
+        "tags": [
+          "Destino"
+        ],
+        "description": "Lista local específico cadastrado pelo usuário autenticado",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -415,9 +429,9 @@
       },
       "put": {
         "tags": [
-          "Local"
+          "Destino"
         ],
-        "description": "",
+        "description": "Atualiza dados do local cadastrado pelo usuário autenticado",
         "parameters": [
           {
             "name": "id",
@@ -439,15 +453,31 @@
               "properties": {
                 "nome": {
                   "type": "string",
-                  "example": "Nome Alterado"
+                  "example": "Praia da Armação"
                 },
                 "descricao": {
                   "type": "string",
-                  "example": "Local muito bom para passar o dia com a família, lagoa própria pra banho e com opção de realizar trilha no local, há um restaurante na entrada da lagoa"
+                  "example": "Praia extensa com restaurantes de frutos do mar e ideal para passear de barco, nadar e fazer caminhadas pela encosta."
                 },
                 "coordenadas_geo": {
                   "type": "string",
-                  "example": "-27.7292638,-48.5559080"
+                  "example": "-27.7442822,-48.5182281"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "88066260"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "Florianópolis"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "Santa Catarina"
+                },
+                "pais": {
+                  "type": "string",
+                  "example": "Brasil"
                 }
               }
             }
@@ -460,8 +490,8 @@
           "401": {
             "description": "Unauthorized"
           },
-          "403": {
-            "description": "Forbidden"
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -470,9 +500,9 @@
       },
       "delete": {
         "tags": [
-          "Local"
+          "Destino"
         ],
-        "description": "",
+        "description": "Exclui local cadastrado pelo usuário autenticado",
         "parameters": [
           {
             "name": "id",
@@ -487,11 +517,100 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
-          "403": {
-            "description": "Forbidden"
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/home/": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "description": "Retorna o número de usuários que estão ativos (status = true).",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/home/{id}": {
+      "put": {
+        "tags": [
+          "Home"
+        ],
+        "description": "Desativa o status de um usuário ao realizar o logout.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/home/listarDestinos": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "description": "Retorna uma lista de todos os destinos disponíveis.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/home/totalDestinos": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "description": "Retorna a contagem total de destinos no sistema.",
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "500": {
             "description": "Internal Server Error"

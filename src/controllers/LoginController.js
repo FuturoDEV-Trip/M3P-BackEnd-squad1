@@ -1,51 +1,62 @@
 const Usuario = require('../models/Usuario')
 const { sign } = require('jsonwebtoken')
-const { compare } = require('bcrypt')
+const bcrypt = require('bcrypt')
 
 class LoginController {
     async logar(req, res) {
-                /*
-            #swagger.tags = ['Login'],
-            #swagger.parameters['body'] = {
-                in: 'body',
-                description: 'Login',
-                schema: {
-                    $email: 'email@email.com',
-                    $password: '1234'
-                }
+    /*
+        #swagger.path = '/',
+        #swagger.method = 'post',
+        #swagger.tags = ['Login'],
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Login',
+            schema: {
+                $email: 'catarina_costa@lins.net.br',
+                $password: '12345'
             }
-        */
+        }
+    */
         try {
             const email = req.body.email
             const password = req.body.password
            
             if (!email) {
-                return res.status(400).json({ erro: 'Informe o email' })
+                return res.status(400).json({ erro: 'Informe seu email.' })
             }
             if (!password) {
-                return res.status(400).json({ erro: 'Informe a senha' })
+                return res.status(400).json({ erro: 'Informe sua senha.' })
             }
 
             const usuario = await Usuario.findOne({
                 where: { email: email }
             })
             if (!usuario) {
-                return res.status(404).json({ erro: 'Email e senha não correspondem a nenhum usuário' })
+                return res.status(401).json({ erro: 'Email e senha não correspondem a nenhum usuário.' })
             }
 
-            const hashSenha = await compare(password, usuario.password)
-            if(hashSenha === false) {
-                return res.status(400).json({ mensagem: 'Senha inválida' })
+            const hashSenha = await bcrypt.compare(password, usuario.password)
+            if(!hashSenha) {
+                return res.status(400).json({ mensagem: 'Senha inválida.' })
             }
 
-            const payload = { sub: usuario.id, email: usuario.email, nome: usuario.nome }
-            const token = sign(payload, process.env.SECRET_JWT)
+            usuario.status = true
+            await usuario.save()
 
-            res.status(200).json({ Token: token })
+            const payload = { sub: usuario.id, nome: usuario.nome }
+            const token = sign(payload, process.env.SECRET_JWT, { expiresIn: '60m' })
+
+            return res.status(200).json({
+                usuario: {
+                  id: usuario.id,
+                  nome: usuario.nome,
+                },
+                token: token
+              })
 
         } catch (error) {   
             console.log(error.message)         
-            return res.status(500).json({ erro: 'Solicitação não pôde ser atendida' })            
+            return res.status(500).json({ erro: 'Solicitação não pôde ser atendida.' })            
         }
     }
 }

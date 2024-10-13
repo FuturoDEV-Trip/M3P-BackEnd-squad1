@@ -5,15 +5,17 @@ async function consultaCidade(coordenadas_geo) {
         const [lat, lon] = coordenadas_geo.split(',')
         const busca = await axios.get(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`)        
 
-        if (busca.data.address && busca.data.address.city && busca.data.address.state) {
+        if (busca.data.address && busca.data.address.postcode && busca.data.address.city && busca.data.address.state) {
             const cidade = busca.data.address.city
-            const uf = busca.data.address.state
-            return { cidade:cidade, uf:uf }
+            const estado = busca.data.address.state
+            const pais = busca.data.address.country
+            const cep = busca.data.address.postcode
+            return { cidade:cidade, estado:estado, pais:pais, cep:cep }
         } else {
-            throw new Error('Cidade e UF não foram encontradas para as coordenadas fornecidas')
+            throw new Error('Dados do local não foram encontrados para as coordenadas fornecidas')
         }
     } catch (error) {
-        throw new Error(`Erro ao consultar a cidade e o estado (UF): ${error.message}`)
+        throw new Error(`Erro ao consultar dados da localidade: ${error.message}`)
     }
 }
 

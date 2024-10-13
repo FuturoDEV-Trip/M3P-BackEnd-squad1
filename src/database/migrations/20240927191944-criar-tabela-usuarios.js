@@ -23,6 +23,19 @@ module.exports = {
         allowNull: false,
         unique: true        
       },
+      data_nascimento: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       cep: {
         type: Sequelize.STRING,
         allowNull: false
@@ -35,21 +48,20 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      complemento: {
+      bairro: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      email: {
+      cidade: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
-      },
-      data_nascimento: {
-        type: Sequelize.DATE,
         allowNull: false
       },
-      password: {
+      estado: {
         type: Sequelize.STRING,
+        allowNull: false
+      },
+      status: {
+        type: Sequelize.BOOLEAN,
         allowNull: false
       },
       createdAt: {
@@ -61,7 +73,6 @@ module.exports = {
         allowNull:false
       }
     });
-
   },
 
   async down (queryInterface, Sequelize) {

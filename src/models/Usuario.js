@@ -1,7 +1,5 @@
 const { DataTypes } = require('sequelize')
 const { connection } = require('../database/connection')
-const cpfCheck = require('cpf-check')
-const { hash } = require('bcrypt')
 
 const Usuario = connection.define('usuarios', {
     nome: {
@@ -15,14 +13,20 @@ const Usuario = connection.define('usuarios', {
     cpf: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
-        validate: {
-            validaCpf(cpf) {
-                if (!cpfCheck.validate(cpf)) {
-                    throw new Error('CPF inválido')
-                }
-            }
-        }
+        unique: true
+    },
+    data_nascimento: {
+        type: DataTypes.DATEONLY,
+        allowNull: false
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
     cep: {
         type: DataTypes.STRING,
@@ -36,27 +40,22 @@ const Usuario = connection.define('usuarios', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    complemento: {
-        type: DataTypes.STRING
-    },
-    email: {
+    bairro: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    data_nascimento: {
-        type: DataTypes.DATEONLY,
         allowNull: false
     },
-    password: {
+    cidade: {
         type: DataTypes.STRING,
+        allowNull: false
+    },
+    estado: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    status: {
+        type: DataTypes.BOOLEAN,
         allowNull: false
     }
-})
-
-Usuario.beforeSave(async (user) => {    
-    user.password = await hash(user.password, 8)
-    return user    
 })
 
 module.exports = Usuario

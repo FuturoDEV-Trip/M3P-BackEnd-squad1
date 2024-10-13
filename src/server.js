@@ -21,7 +21,7 @@ class Server {
     async database() {
         try {
             await connection.authenticate()
-            console.log('Conexão bem sucedida')            
+            console.log('Conexão com o banco de dados PostgreSQL foi estabelecida com sucesso.')            
         } catch (error) {
             console.error('Não foi possível conectar o banco de dados', error)
             throw error
