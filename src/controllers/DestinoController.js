@@ -23,6 +23,9 @@ class DestinoController {
     try {
       const usuario_id = req.userId
       req.body.usuario_id = usuario_id
+
+      console.log('Dados id:', usuario_id);
+      
       
       const { nome, descricao, coordenadas_geo } = req.body
 
@@ -43,6 +46,9 @@ class DestinoController {
 
       const dadosCoordenadas = await consultaCidade (coordenadas_geo)
 
+      console.log('Dados da cidade:', dadosCoordenadas);
+      
+
       const destino = await Destino.create({
         usuario_id,
         nome,
@@ -54,10 +60,13 @@ class DestinoController {
         pais: dadosCoordenadas.pais
       })
 
+      console.log('Destino criado:', destino);      
+
       await destino.save()
 
       res.status(201).json(destino)
     } catch (error) {
+      console.error('Erro ao cadastrar destino:', error);
       res.status(500).json({ erro: "Não foi possível efetuar o cadastro do destino." })
     }
   }
