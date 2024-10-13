@@ -32,9 +32,9 @@ class HomeController {
         #swagger.description= 'Retorna a contagem total de destinos no sistema e a lista de destinos cadastrados na plataforma.'
     */
     try {
-      const { count } = await Destino.findAndCountAll();
+      const { count, rows: tours } = await Destino.findAndCountAll();
 
-      return res.status(200).json({ totalDestinos: count });
+      return res.status(200).json({ totalDestinos: count, tours });
     } catch (error) {
       return res.status(500).json({
         error:
