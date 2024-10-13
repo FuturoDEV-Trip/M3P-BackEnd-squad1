@@ -90,7 +90,7 @@ class DestinoController {
       const { id } = req.params;
 
       const passeios = await Destino.findAndCountAll({
-        where: { id },
+        where: { usuario_id: id },
       });
 
       if (passeios.count === 0) {
