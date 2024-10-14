@@ -26,8 +26,10 @@ class UsuarioController {
             }
         */
         try {
+            console.log('Iniciando cadastro de usuário:', req.body)
+
             const { nome, sexo, cpf, cep, numero,
-                email, data_nascimento, password, endereco, bairro, cidade, estado } = req.body                     
+                email, data_nascimento, password, endereco, bairro, cidade, estado } = req.body                    
 
             if (!(nome || sexo || cpf || cep || numero
                 || email || data_nascimento || password)) {
@@ -77,13 +79,14 @@ class UsuarioController {
               estado: dadosCep.estado,
               status: false
             })
-
-            await usuario.validate()
-            await usuario.save()
+            
+            console.log('Usuário cadastrado:', usuario)
 
             res.status(201).json(usuario)
 
         } catch (error) {
+            console.error('Erro ao cadastrar usuário:', error)
+            
             if (error.message.includes('CEP não encontrado')) {
                 return res.status(400).json({ erro: 'CEP inválido.' })
             } else {
