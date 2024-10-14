@@ -91,7 +91,7 @@ Caso tenha alguma dúvida!!
   Para requisições geográficas:
 
 - axios
-- nominatim-geocodere colocada no banco de dados daquele destino.
+- nominatim colocada no banco de dados daquele destino.
 
   Somente o usuário daquele destino pode atualizar ou deletar seu(s) destino (s) cadastrado(s).
 
