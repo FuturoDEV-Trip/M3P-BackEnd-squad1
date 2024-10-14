@@ -42,7 +42,7 @@ class DestinoController {
         !pais
       ) {
         return res
-          .status(400)
+          .status(401)
           .json({ erro: "Todos os campos são obrigatórios." });
       }
 
@@ -54,7 +54,7 @@ class DestinoController {
       });
 
       if (coordenadasExistente) {
-        return res.status(400).json({
+        return res.status(402).json({
           mensagem: "Coordenadas já foram cadastradas para este usuário.",
         });
       }
