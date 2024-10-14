@@ -15,9 +15,9 @@ class Server {
 
     async middlewares(app) {
         app.use((req, res, next) => {
-            res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' https://translate.yandex.net;");
+            res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' https://translate.yandex.net https://yastatic.net;");
             next();
-        })
+        });
 
         app.use(cors({
             origin: 'https://m3p-frontend-squad1-nxcl.onrender.com',
