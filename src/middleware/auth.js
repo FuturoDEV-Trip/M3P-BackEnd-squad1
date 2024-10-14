@@ -8,7 +8,13 @@ async function auth(req, res, next) {
       return res.status(401).json({ message: "Token não fornecido." });
     }
 
-    const token = authorization.split(" ")[1];
+    let token;
+
+    if (authorization.startsWith("Bearer ")) {
+      token = authorization.split(" ")[1];
+    } else {
+      token = authorization;
+    }
 
     if (!token) {
       return res.status(401).json({ message: "Token inválido." });
