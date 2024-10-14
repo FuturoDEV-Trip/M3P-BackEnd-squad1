@@ -27,7 +27,7 @@ class UsuarioController {
         */
         try {
             const { nome, sexo, cpf, cep, numero,
-                email, data_nascimento, password, endereco, bairro, cidade, estado } = req.body                     
+                email, data_nascimento, password } = req.body                     
 
             if (!(nome || sexo || cpf || cep || numero
                 || email || data_nascimento || password)) {
