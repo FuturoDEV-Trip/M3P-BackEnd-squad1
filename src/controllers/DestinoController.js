@@ -42,21 +42,8 @@ class DestinoController {
         !pais
       ) {
         return res
-          .status(401)
+          .status(400)
           .json({ erro: "Todos os campos são obrigatórios." });
-      }
-
-      const coordenadasExistente = await Destino.findOne({
-        where: {
-          usuario_id,
-          coordenadas_geo,
-        },
-      });
-
-      if (coordenadasExistente) {
-        return res.status(402).json({
-          mensagem: "Coordenadas já foram cadastradas para este usuário.",
-        });
       }
 
       const destino = await Destino.create({
