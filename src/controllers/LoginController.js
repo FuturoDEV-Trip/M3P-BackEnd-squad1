@@ -1,9 +1,9 @@
-const Usuario = require('../models/Usuario')
-const { sign } = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const Usuario = require("../models/Usuario");
+const { sign } = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 class LoginController {
-    async logar(req, res) {
+  async logar(req, res) {
     /*
         #swagger.path = '/',
         #swagger.method = 'post',
@@ -17,48 +17,51 @@ class LoginController {
             }
         }
     */
-        try {
-            const email = req.body.email
-            const password = req.body.password
-           
-            if (!email) {
-                return res.status(400).json({ erro: 'Informe seu email.' })
-            }
-            if (!password) {
-                return res.status(400).json({ erro: 'Informe sua senha.' })
-            }
+    try {
+      const { email, password } = req.body;
 
-            const usuario = await Usuario.findOne({
-                where: { email: email }
-            })
-            if (!usuario) {
-                return res.status(401).json({ erro: 'Email e senha não correspondem a nenhum usuário.' })
-            }
+      if (!email) {
+        return res.status(400).json({ erro: "Informe seu email." });
+      }
+      if (!password) {
+        return res.status(400).json({ erro: "Informe sua senha." });
+      }
 
-            const hashSenha = await bcrypt.compare(password, usuario.password)
-            if(!hashSenha) {
-                return res.status(400).json({ mensagem: 'Senha inválida.' })
-            }
+      const usuario = await Usuario.findOne({
+        where: { email },
+      });
 
-            usuario.status = true
-            await usuario.save()
+      if (!usuario) {
+        return res
+          .status(401)
+          .json({ erro: "Email e senha não correspondem a nenhum usuário." });
+      }
 
-            const payload = { sub: usuario.id, nome: usuario.nome }
-            const token = sign(payload, process.env.SECRET_JWT, { expiresIn: '60m' })
+      const hashSenha = await bcrypt.compare(password, usuario.password);
+      if (!hashSenha) {
+        return res.status(400).json({ mensagem: "Senha inválida." });
+      }
 
-            return res.status(200).json({
-                usuario: {
-                  id: usuario.id,
-                  nome: usuario.nome,
-                },
-                token: token
-              })
+      usuario.status = true;
+      await usuario.save();
 
-        } catch (error) {   
-            console.log(error.message)         
-            return res.status(500).json({ erro: 'Solicitação não pôde ser atendida.' })            
-        }
+      const payload = { sub: usuario.id, nome: usuario.nome };
+      const token = sign(payload, process.env.SECRET_JWT, { expiresIn: "60m" });
+
+      return res.status(200).json({
+        usuario: {
+          id: usuario.id,
+          nome: usuario.nome,
+        },
+        token: token,
+      });
+    } catch (error) {
+      console.log(error.message);
+      return res
+        .status(500)
+        .json({ erro: "Solicitação não pôde ser atendida." });
     }
+  }
 }
 
-module.exports = new LoginController()
+module.exports = new LoginController();
